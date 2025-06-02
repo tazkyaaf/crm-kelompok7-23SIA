@@ -16,7 +16,7 @@ const menuItems = [
   { name: 'Produk', icon: <Box />, path: '/produkk' },
   { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
-
+  { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
 ]
 
 const accountItems = [
