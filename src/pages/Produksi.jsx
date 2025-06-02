@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const ProduksiPage = () => {
-  const [data, setData] = useState([
-    { id: 1, nota: 'INV001', konsumen: 'Budi Santoso', status: 'Antri' },
-    { id: 2, nota: 'INV003', konsumen: 'Andi Wijaya', status: 'Antri' },
-  ])
+  const localKey = 'produksiData'
+
+  // Ambil data dari localStorage saat pertama kali komponen dimuat
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem(localKey)
+    return saved ? JSON.parse(saved) : []
+  })
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setFormData] = useState({ id: null, nota: '', konsumen: '', status: 'Antri' })
+
+  // Simpan ke localStorage setiap kali data berubah
+  useEffect(() => {
+    localStorage.setItem(localKey, JSON.stringify(data))
+  }, [data])
 
   const openModal = (item = { nota: '', konsumen: '', status: 'Antri' }) => {
     setFormData(item)
@@ -41,7 +49,6 @@ const ProduksiPage = () => {
         <button
           onClick={() => openModal()}
           className="bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white font-semibold px-5 py-3 rounded-lg shadow-md transition duration-300 ease-in-out"
-          aria-label="Tambah Konsumen"
         >
           + Tambah Konsumen
         </button>
@@ -54,27 +61,21 @@ const ProduksiPage = () => {
             className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between"
           >
             <div>
-              <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold">
-                No. Nota
-              </p>
+              <p className="text-xs text-gray-400 uppercase tracking-wide font-semibold">No. Nota</p>
               <h2 className="text-xl font-semibold text-purple-800">{item.nota}</h2>
 
-              <p className="text-xs text-gray-400 uppercase tracking-wide mt-4 font-semibold">
-                Konsumen
-              </p>
+              <p className="text-xs text-gray-400 uppercase tracking-wide mt-4 font-semibold">Konsumen</p>
               <h3 className="text-lg font-bold text-gray-800">{item.konsumen}</h3>
             </div>
 
             <div className="mt-6 flex justify-between items-center">
               <span
                 className={`inline-block px-4 py-1 rounded-full text-sm font-medium
-                  ${
-                    item.status === 'Antri'
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : item.status === 'Selesai'
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-blue-100 text-blue-800'
-                  }
+                  ${item.status === 'Antri'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : item.status === 'Selesai'
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-blue-100 text-blue-800'}
                 `}
               >
                 {item.status}
@@ -83,16 +84,14 @@ const ProduksiPage = () => {
                 <button
                   onClick={() => openModal(item)}
                   className="text-purple-600 hover:text-purple-900 font-semibold transition-colors"
-                  aria-label={`Edit data untuk ${item.konsumen}`}
                 >
-                ✎ Edit
+                  ✎ Edit
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
                   className="text-red-600 hover:text-red-800 font-semibold transition-colors"
-                  aria-label={`Hapus data untuk ${item.konsumen}`}
                 >
-                ⊘ Hapus
+                  ⊘ Hapus
                 </button>
               </div>
             </div>
@@ -104,9 +103,6 @@ const ProduksiPage = () => {
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          aria-modal="true"
-          role="dialog"
-          tabIndex={-1}
           onClick={() => setIsModalOpen(false)}
         >
           <form
@@ -118,9 +114,7 @@ const ProduksiPage = () => {
               {formData.id ? 'Edit Konsumen' : 'Tambah Konsumen'}
             </h2>
 
-            <label className="block mb-2 text-sm font-medium text-gray-700">
-              No. Nota
-            </label>
+            <label className="block mb-2 text-sm font-medium text-gray-700">No. Nota</label>
             <input
               type="text"
               value={formData.nota}
@@ -130,9 +124,7 @@ const ProduksiPage = () => {
               autoFocus
             />
 
-            <label className="block mb-2 text-sm font-medium text-gray-700">
-              Nama Konsumen
-            </label>
+            <label className="block mb-2 text-sm font-medium text-gray-700">Nama Konsumen</label>
             <input
               type="text"
               value={formData.konsumen}
@@ -162,7 +154,7 @@ const ProduksiPage = () => {
               </button>
               <button
                 type="submit"
-                className="px-6 py-3 bg-purple-600 hover:bg-purple-700 active:bg-purple-800 text-white rounded-lg font-semibold transition"
+                className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition"
               >
                 Simpan
               </button>
