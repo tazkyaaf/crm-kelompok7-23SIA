@@ -8,6 +8,7 @@ import {
   User,
   LogIn,
   UserPlus,
+  ShoppingBag,
 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -18,7 +19,8 @@ const menuItems = [
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
   { name: 'Produksi', icon: <User />, path: '/produksi' }, 
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
-   { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
+  { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
+  { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
 ];
 
  
