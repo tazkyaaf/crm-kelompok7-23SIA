@@ -6,6 +6,7 @@ import {
   BarChart2,     // untuk laporan
   Settings,      // untuk pengaturan akun
   User,
+  BadgePercent ,
   LogIn,
   UserPlus,
 } from 'lucide-react'
@@ -18,6 +19,8 @@ const menuItems = [
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
   { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
   { name: 'order', icon: <ShoppingCart />, path: '/Order' },
+  { name: 'loyalty Admin', icon: <BadgePercent />, path: '/Loyalty' },
+  { name: 'Membership', icon: <BadgePercent />, path: '/membership' },
 ]
 
 const accountItems = [
