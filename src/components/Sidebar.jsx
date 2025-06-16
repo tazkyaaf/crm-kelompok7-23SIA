@@ -18,6 +18,7 @@ const menuItems = [
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
   { name: 'Produksi', icon: <User />, path: '/produksi' }, 
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
+  { name: 'Transaksi', icon: <User />, path: '/transaksi' }, 
 ];
 
 

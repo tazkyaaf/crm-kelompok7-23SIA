@@ -5,6 +5,7 @@ import CustomerManagement from "./pages/CustomerManagement";
 // import SalesManagement from "./pages/SalesManagement";
 import SalesManagement from "./pages/SalesManagement";
 import Produksi from './pages/Produksi';
+import Transaksi from "./pages/Transaksi";
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
     
         <Route path="pelanggan" element={<CustomerManagement />} />
         <Route path='/penjualan' element={<SalesManagement />} />
-          <Route path="/produksi" element={<Produksi />} />
+        <Route path="/produksi" element={<Produksi />} />
+        <Route path="/transaksi" element={<Transaksi/>} />
        
       </Route>
     </Routes>
