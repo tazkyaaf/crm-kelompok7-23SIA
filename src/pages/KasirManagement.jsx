@@ -73,7 +73,9 @@ export default function KasirManagement() {
 
     if (editingId) {
       const updatedList = kasirList.map((k) =>
-        k.id === editingId ? { ...k, ...formData, diperbaharui: formattedTime } : k
+        k.id === editingId
+          ? { ...k, ...formData, diperbaharui: formattedTime }
+          : k
       );
       setKasirList(updatedList);
     } else {
@@ -110,7 +112,9 @@ export default function KasirManagement() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-semibold mb-6 text-center">Manajemen Kasir</h1>
+      <h1 className="text-3xl font-semibold mb-6 text-center">
+        Manajemen Kasir
+      </h1>
 
       <button
         onClick={() => {
@@ -265,7 +269,9 @@ export default function KasirManagement() {
 
       {selectedKasir && (
         <div className="mt-8 p-6 border rounded-lg shadow-lg bg-white max-w-md mx-auto">
-          <h3 className="text-xl font-semibold mb-4 border-b pb-2">Detail Kasir</h3>
+          <h3 className="text-xl font-semibold mb-4 border-b pb-2">
+            Detail Kasir
+          </h3>
           <p>
             <strong>Nama:</strong> {selectedKasir.nama}
           </p>
