@@ -1,27 +1,28 @@
 import React from "react";
-import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
-  BarElement,
   CategoryScale,
   LinearScale,
+  BarElement,
+  LineElement,
   PointElement,
+  ArcElement,
+  Title,
   Tooltip,
   Legend,
-  ArcElement,
 } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 
 ChartJS.register(
-  LineElement,
-  BarElement,
   CategoryScale,
   LinearScale,
+  BarElement,
+  LineElement,
   PointElement,
+  ArcElement,
+  Title,
   Tooltip,
-  Legend,
-  ArcElement
+  Legend
 );
 
 const Dashboard = () => {
@@ -39,19 +40,21 @@ const Dashboard = () => {
     datasets: [
       {
         label: "Sales",
-        data: [85, 91, 98, 87, 95, 90, 100, 110],
-        borderColor: "#6366f1",
+        data: [90, 85, 99, 88, 95, 98, 100, 97],
+        borderColor: "#6366F1",
         backgroundColor: "rgba(99, 102, 241, 0.2)",
-        tension: 0.4,
         fill: true,
+        tension: 0.4,
+        pointRadius: 3,
       },
       {
         label: "Cost",
-        data: [70, 75, 80, 72, 78, 76, 83, 85],
-        borderColor: "#34d399",
-        backgroundColor: "rgba(52, 211, 153, 0.2)",
-        tension: 0.4,
+        data: [72, 69, 81, 66, 75, 79, 82, 80],
+        borderColor: "#60A5FA",
+        backgroundColor: "rgba(96, 165, 250, 0.2)",
         fill: true,
+        tension: 0.4,
+        pointRadius: 3,
       },
     ],
   };
@@ -60,8 +63,9 @@ const Dashboard = () => {
     labels: ["Fashion", "Accessories"],
     datasets: [
       {
-        data: [251000, 176000],
-        backgroundColor: ["#4f46e5", "#06b6d4"],
+        data: [251, 176],
+        backgroundColor: ["#6366F1", "#93C5FD"],
+        borderWidth: 1,
       },
     ],
   };
@@ -70,70 +74,76 @@ const Dashboard = () => {
     labels: ["S", "M", "T", "W", "T", "F", "S"],
     datasets: [
       {
-        label: "Fashion",
-        data: [80, 90, 100, 85, 95, 110, 120],
-        backgroundColor: "#4f46e5",
+        label: "Visitors",
+        data: [100, 120, 90, 130, 110, 115, 125],
+        backgroundColor: "#A5B4FC",
       },
       {
-        label: "Accessories",
-        data: [60, 70, 85, 60, 70, 90, 100],
-        backgroundColor: "#06b6d4",
+        label: "Conversions",
+        data: [60, 80, 50, 70, 60, 75, 85],
+        backgroundColor: "#60A5FA",
       },
     ],
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Hello Aisah!</h1>
+    <div className="p-4 space-y-6">
+      <h1 className="text-xl font-bold">Hello Aisah!</h1>
 
       {/* Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {cards.map((card, index) => (
-          <div key={index} className="bg-white rounded-xl shadow p-4 text-center">
-            <p className="text-sm text-gray-500">{card.title}</p>
-            <h2 className="text-xl font-bold text-indigo-600">{card.value}</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {cards.map((card, i) => (
+          <div
+            key={i}
+            className="bg-white rounded-lg shadow p-3 text-center"
+          >
+            <p className="text-xs text-gray-500">{card.title}</p>
+            <h2 className="text-lg font-bold text-indigo-600">{card.value}</h2>
           </div>
         ))}
       </div>
 
-      {/* Line Chart */}
-      <div className="bg-white rounded-xl shadow p-4">
-        <h2 className="font-semibold text-lg mb-2">Gross Sales</h2>
-        <Line data={lineData} />
+      {/* Gross Sales Chart - Full Width */}
+      <div className="bg-white rounded-lg shadow p-4 w-full">
+        <h2 className="font-semibold text-sm mb-2">Gross Sales</h2>
+        <div className="w-full h-[300px]">
+          <Line data={lineData} options={{ responsive: true, maintainAspectRatio: false }} />
+        </div>
       </div>
 
-      {/* Visitors and Customers */}
+      {/* Website Visitors & History */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <p className="text-sm text-gray-500">Website Visitors</p>
-          <h2 className="text-2xl font-bold">750K</h2>
+        <div className="bg-white rounded-lg shadow p-3 text-center">
+          <p className="text-xs text-gray-500">Website Visitors</p>
+          <h2 className="text-xl font-bold">750K</h2>
         </div>
-        <div className="bg-white rounded-xl shadow p-4 text-center">
-          <p className="text-sm text-gray-500">New Customers</p>
-          <h2 className="text-2xl font-bold">7,500</h2>
+        <div className="bg-white rounded-lg shadow p-3 text-center">
+          <p className="text-xs text-gray-500">New Customers</p>
+          <h2 className="text-xl font-bold">7,500</h2>
         </div>
-
-        {/* History */}
-        <div className="bg-white rounded-xl shadow p-4">
-          <h2 className="font-semibold text-lg mb-2">Histori</h2>
-          <ul className="text-sm space-y-2">
-            <li>✅ $2400, Purchase - 11 JUL 8:10 PM</li>
-            <li>🛒 New order #8744152 - 11 JUL 7 PM</li>
-            <li>👤 New user added - 11 JUL 1:21 AM</li>
+        <div className="bg-white rounded-lg shadow p-3 text-sm">
+          <h2 className="font-semibold mb-1">Histori</h2>
+          <ul className="space-y-1">
+            <li>✅ $2400 Purchase - 11 JUL</li>
+            <li>🛒 New order #8744152 - 11 JUL</li>
+            <li>👤 New user - 11 JUL</li>
           </ul>
         </div>
       </div>
 
-      {/* Earnings and Conversions */}
+      {/* Earnings + Full Width Conversions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white rounded-xl shadow p-4">
-          <h2 className="font-semibold text-lg mb-2">Earnings</h2>
-          <Doughnut data={doughnutData} />
+        <div className="bg-white rounded-lg shadow p-3">
+          <h2 className="text-sm font-semibold mb-2">Earnings</h2>
+          <div className="h-40">
+            <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
+          </div>
         </div>
-
-        <div className="bg-white rounded-xl shadow p-4">
-          <h2 className="font-semibold text-lg mb-2">Conversions</h2>
-          <Bar data={conversionsData} />
+        <div className="bg-white rounded-lg shadow p-3 w-full">
+          <h2 className="text-sm font-semibold mb-2">Conversions</h2>
+          <div className="h-40">
+            <Bar data={conversionsData} options={{ responsive: true, maintainAspectRatio: false }} />
+          </div>
         </div>
       </div>
     </div>
