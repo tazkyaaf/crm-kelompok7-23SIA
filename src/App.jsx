@@ -4,6 +4,7 @@ import MainLayout from "./components/MainLayout";
 import CustomerManagement from "./pages/CustomerManagement";
 import KasirManagement from "./pages/KasirManagement";
 import SalesManagement from "./pages/SalesManagement";
+import OrderManagementPage from "./pages/OrderManagementPage";
 // import SalesManagement from "./pages/SalesManagement";
 import Produksi from './pages/Produksi';
 import ManagementDiskon from "./pages/ManagementDiskon";
@@ -18,7 +19,11 @@ function App() {
         <Route path="produksi" element={<Produksi />} />
         <Route path="kasir" element={<KasirManagement />} />
         <Route path="Penjualan" element={<SalesManagement />} />
+<<<<<<< HEAD
         <Route path="/management-diskon" element={<ManagementDiskon />} />
+=======
+        <Route path="Order" element={<OrderManagementPage />} />
+>>>>>>> origin/ginta
       </Route>
     </Routes>
   );
