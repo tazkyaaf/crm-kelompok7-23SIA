@@ -70,77 +70,58 @@ const ManagementDiskon = () => {
   };
 
   return (
-    <div className="management-diskon px-6 py-4 bg-blue-50 min-h-screen">
-      <header className="text-center mb-6">
-        <h1 className="text-3xl font-semibold text-blue-700">Manajemen Promo Laundry</h1>
+    <div className="management-diskon min-h-screen bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 py-8 px-6">
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-white">Manajemen Promo Laundry</h1>
+        <p className="text-lg text-gray-200">Kelola semua promo dengan mudah dan efisien</p>
       </header>
 
       <div className="flex gap-8">
         {/* Daftar Promo */}
-        <div className="promo-list flex-1 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-blue-600 mb-4">Daftar Promo Aktif</h2>
-          <table className="min-w-full table-auto">
-            <thead>
-              <tr className="bg-blue-600 text-white">
-                <th className="px-4 py-2">Kode Promo</th>
-                <th className="px-4 py-2">Deskripsi</th>
-                <th className="px-4 py-2">Diskon (%)</th>
-                <th className="px-4 py-2">Aktif Sampai</th>
-                <th className="px-4 py-2">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="promo-list flex-1 bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h2 className="text-2xl font-semibold text-blue-700 mb-6">Daftar Promo Aktif</h2>
+          {promos.length === 0 ? (
+            <p className="text-center text-lg text-gray-500">Belum ada promo yang tersedia</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {promos.map((promo) => (
-                <tr key={promo.kode} className="hover:bg-blue-100">
-                  <td className="px-4 py-2">{promo.kode}</td>
-                  <td className="px-4 py-2">{promo.deskripsi}</td>
-                  <td className="px-4 py-2">{promo.diskon}%</td>
-                  <td className="px-4 py-2">{promo.akhir}</td>
-                  <td className="px-4 py-2 flex gap-4 justify-center items-center">
-                    {/* Edit icon: tanda tambah */}
+                <div key={promo.kode} className="card bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-all duration-300">
+                  <h3 className="text-xl font-semibold text-blue-600">{promo.kode}</h3>
+                  <p className="text-gray-700 mt-2">{promo.deskripsi}</p>
+                  <p className="text-blue-500 font-semibold mt-4">Diskon: {promo.diskon}%</p>
+                  <p className="text-gray-600 mt-2">Aktif Sampai: {promo.akhir}</p>
+                  <div className="mt-4 flex gap-4 justify-center">
+                    {/* Edit icon */}
                     <span
                       onClick={() => handleEditPromo(promo)}
-                      className="cursor-pointer text-yellow-500 text-2xl select-none"
+                      className="cursor-pointer text-yellow-500 hover:text-yellow-700 text-2xl transition-all duration-300"
                       title="Edit Promo"
                     >
-                      &#43;
+                      <i className="fas fa-edit"></i>
                     </span>
 
-                    {/* Delete icon: tong sampah SVG */}
+                    {/* Delete icon */}
                     <span
                       onClick={() => handleDeletePromo(promo.kode)}
-                      className="cursor-pointer text-red-500 hover:text-red-700"
+                      className="cursor-pointer text-red-500 hover:text-red-700 text-2xl transition-all duration-300"
                       title="Hapus Promo"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
-                        />
-                      </svg>
+                      <i className="fas fa-trash-alt"></i>
                     </span>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          )}
         </div>
 
         {/* Form Tambah/Edit Promo */}
-        <div className="form-promo flex-1 bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold text-blue-600 mb-4">
+        <div className="form-promo flex-1 bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+          <h2 className="text-2xl font-semibold text-blue-700 mb-6">
             {editMode ? 'Edit Promo' : 'Tambah Promo Baru'}
           </h2>
           <form onSubmit={editMode ? handleUpdatePromo : handleAddPromo}>
-            <div className="mb-4">
+            <div className="mb-6">
               <label htmlFor="kode-promo" className="block text-blue-700 font-semibold">Kode Promo</label>
               <input
                 type="text"
@@ -149,11 +130,11 @@ const ManagementDiskon = () => {
                 value={newPromo.kode}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
               <label htmlFor="deskripsi-promo" className="block text-blue-700 font-semibold">Deskripsi Promo</label>
               <textarea
                 id="deskripsi-promo"
@@ -162,11 +143,11 @@ const ManagementDiskon = () => {
                 onChange={handleInputChange}
                 rows="4"
                 required
-                className="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               ></textarea>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
               <label htmlFor="diskon-promo" className="block text-blue-700 font-semibold">Diskon (%)</label>
               <input
                 type="number"
@@ -177,11 +158,11 @@ const ManagementDiskon = () => {
                 min="1"
                 max="100"
                 required
-                className="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
               <label htmlFor="tanggal-akhir" className="block text-blue-700 font-semibold">Aktif Sampai</label>
               <input
                 type="date"
@@ -190,13 +171,13 @@ const ManagementDiskon = () => {
                 value={newPromo.akhir}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 mt-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
             >
               {editMode ? 'Update Promo' : 'Tambah Promo'}
             </button>
