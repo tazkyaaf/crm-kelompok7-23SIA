@@ -19,11 +19,8 @@ function App() {
         <Route path="produksi" element={<Produksi />} />
         <Route path="kasir" element={<KasirManagement />} />
         <Route path="Penjualan" element={<SalesManagement />} />
-<<<<<<< HEAD
         <Route path="/management-diskon" element={<ManagementDiskon />} />
-=======
         <Route path="Order" element={<OrderManagementPage />} />
->>>>>>> origin/ginta
       </Route>
     </Routes>
   );

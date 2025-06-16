@@ -21,11 +21,11 @@ const menuItems = [
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
   { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
   { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
+  { name: 'order', icon: <ShoppingCart />, path: '/Order' },
 ];
 
  
-  { name: 'order', icon: <ShoppingCart />, path: '/Order' },
-]
+  
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
