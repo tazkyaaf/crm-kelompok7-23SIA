@@ -7,11 +7,8 @@ import SalesManagement from "./pages/SalesManagement";
 import OrderManagementPage from "./pages/OrderManagementPage";
 // import SalesManagement from "./pages/SalesManagement";
 import Produksi from './pages/Produksi';
-<<<<<<< HEAD
 import ManagementDiskon from "./pages/ManagementDiskon";
-=======
 import Transaksi from "./pages/Transaksi";
->>>>>>> origin/origin/bertin
 
 
 function App() {
@@ -20,18 +17,15 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="pelanggan" element={<CustomerManagement />} />
-<<<<<<< HEAD
         <Route path="produksi" element={<Produksi />} />
         <Route path="kasir" element={<KasirManagement />} />
         <Route path="Penjualan" element={<SalesManagement />} />
         <Route path="/management-diskon" element={<ManagementDiskon />} />
         <Route path="Order" element={<OrderManagementPage />} />
-=======
         <Route path='/penjualan' element={<SalesManagement />} />
         <Route path="/produksi" element={<Produksi />} />
         <Route path="/transaksi" element={<Transaksi/>} />
        
->>>>>>> origin/origin/bertin
       </Route>
     </Routes>
   );
