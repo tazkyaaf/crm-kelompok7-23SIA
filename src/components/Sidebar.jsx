@@ -20,15 +20,12 @@ const menuItems = [
   { name: 'Produksi', icon: <User />, path: '/produksi' }, 
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
   { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
-<<<<<<< HEAD
   { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
 ];
 
  
-=======
   { name: 'order', icon: <ShoppingCart />, path: '/Order' },
 ]
->>>>>>> origin/ginta
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
