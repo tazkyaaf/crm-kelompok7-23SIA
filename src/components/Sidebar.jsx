@@ -1,41 +1,36 @@
 import {
-  LayoutDashboard,
-  Users,         // untuk pelanggan
-  ShoppingCart,  // untuk penjualan
-  Box,           // untuk produk
-  BarChart2,     // untuk laporan
-  Settings,      // untuk pengaturan akun
-  User,
+  Share2,         // Social Media Management
+  Gift,           // Loyalty Management
+  Settings,
   LogIn,
   UserPlus,
-} from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+  LayoutDashboard,
+} from 'lucide-react';
+
+import { Link, useLocation } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard';
 
 const menuItems = [
-  { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
-  { name: 'Produk', icon: <Box />, path: '/produk' },
-  { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
-  { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
-  { name: 'Produksi', icon: <User />, path: '/produksi' }, 
-  { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
-  { name: 'Transaksi', icon: <User />, path: '/transaksi' }, 
-];
 
+  { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
+  { name: 'Social Media', icon: <Share2 />, path: '/socialmediamanagement' },
+  { name: 'Loyalty Program', icon: <Gift />, path: '/loyaltymanagement' },
+];
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
   { name: 'Sign In', icon: <LogIn />, path: '/signin' },
   { name: 'Sign Up', icon: <UserPlus />, path: '/signup' },
-]
+];
 
 const Sidebar = () => {
-  const location = useLocation()
-
-  const isActive = (path) => location.pathname === path
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   return (
     <aside className="bg-white w-64 h-screen shadow-lg px-4 py-6 hidden md:block">
       <div className="text-xl font-bold mb-8 text-purple-700">UMKM CRM</div>
+
       <nav className="space-y-1">
         {menuItems.map((item) => (
           <Link
@@ -71,9 +66,7 @@ const Sidebar = () => {
         ))}
       </nav>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
-
-
+export default Sidebar;
