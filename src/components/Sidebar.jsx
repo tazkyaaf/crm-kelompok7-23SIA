@@ -19,15 +19,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const menuItems = [
   { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
-  { name: 'Produk', icon: <Box />, path: '/produkk' },
-  { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
-  { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
-  { name: 'Produksi', icon: <User />, path: '/produksi' },
-  { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
-  { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
-  { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
-  { name: 'Order', icon: <ShoppingCart />, path: '/Order' },
-  { name: 'Transaksi', icon: <User />, path: '/transaksi' },
   { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
