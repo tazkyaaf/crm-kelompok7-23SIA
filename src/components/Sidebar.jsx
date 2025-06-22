@@ -11,16 +11,13 @@ import {
   UserPlus,
 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 
 const menuItems = [
   { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
-  { name: 'Produk', icon: <Box />, path: '/produkk' },
-  { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
-  { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
-  { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
-  { name: 'order', icon: <ShoppingCart />, path: '/Order' },
-  { name: 'loyalty Admin', icon: <BadgePercent />, path: '/Loyalty' },
-  { name: 'Membership', icon: <BadgePercent />, path: '/membership' },
+  { name: 'Order Management', icon: <FaShoppingCart />, path: '/order' },
+  { name: 'Contact Management', icon: <FaPhoneAlt />, path: '/contact' },
+  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' }
 ]
 
 const accountItems = [
