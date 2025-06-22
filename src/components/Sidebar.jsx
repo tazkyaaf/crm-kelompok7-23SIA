@@ -6,11 +6,13 @@ import {
   BarChart2,     // untuk laporan
   Settings,      // untuk pengaturan akun
   User,
+  BadgePercent ,
   LogIn,
   UserPlus,
   ShoppingBag,
 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 
 const menuItems = [
   { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
@@ -26,11 +28,12 @@ const menuItems = [
   { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
+  { name: 'Order Management', icon: <FaShoppingCart />, path: '/order' },
+  { name: 'Contact Management', icon: <FaPhoneAlt />, path: '/contact' },
+  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' }
 
 ];
 
- 
-  
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },

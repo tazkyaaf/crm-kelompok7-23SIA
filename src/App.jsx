@@ -5,6 +5,11 @@ import CustomerManagement from "./pages/CustomerManagement";
 import KasirManagement from "./pages/KasirManagement";
 import SalesManagement from "./pages/SalesManagement";
 import OrderManagementPage from "./pages/OrderManagementPage";
+import ContactManagement from "./pages/ContactManagement";
+import ContentManagement from "./pages/ContentManagement";
+import MainLayout from "./components/MainLayout";
+import Dashboard from "./pages/Dashboard";
+
 // import SalesManagement from "./pages/SalesManagement";
 import Produksi from './pages/Produksi';
 import ManagementDiskon from "./pages/ManagementDiskon";
@@ -33,6 +38,10 @@ function App() {
         <Route path="/workflow" element={<WorkflowDevelopment />} />
 
        
+    
+       <Route path="Order" element={<OrderManagementPage />} />
+       <Route path="/contact" element={<ContactManagement/>} />
+       <Route path="/content" element={<ContentManagement/>} />
       </Route>
     </Routes>
   );
