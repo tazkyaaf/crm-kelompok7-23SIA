@@ -54,7 +54,7 @@ const ContentManagement = () => {
     }
   };
 
-  
+
   const handleEditClick = (content) => {
     setEditingContent({ ...content });
     setFormData({

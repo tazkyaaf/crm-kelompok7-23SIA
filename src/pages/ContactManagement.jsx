@@ -142,5 +142,4 @@ const ContactManagement = () => {
   );
 };
 
-
 export default ContactManagement;
