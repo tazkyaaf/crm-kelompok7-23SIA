@@ -141,4 +141,5 @@ const ContactManagement = () => {
     </div>
   );
 };
+
 export default ContactManagement;
