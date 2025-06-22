@@ -9,6 +9,9 @@ import OrderManagementPage from "./pages/OrderManagementPage";
 import Produksi from './pages/Produksi';
 import ManagementDiskon from "./pages/ManagementDiskon";
 import Transaksi from "./pages/Transaksi";
+import InvoicingPage from "./pages/InvoicingPage";
+import ServiceConfigurationPage from "./pages/ServiceConfigurationPage";
+import WorkflowDevelopment from "./pages/WorkFlowDevelopment";
 
 
 function App() {
@@ -25,6 +28,10 @@ function App() {
         <Route path='/penjualan' element={<SalesManagement />} />
         <Route path="/produksi" element={<Produksi />} />
         <Route path="/transaksi" element={<Transaksi/>} />
+        <Route path="/invoicing" element={<InvoicingPage />} />
+        <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />
+        <Route path="/workflow" element={<WorkflowDevelopment />} />
+
        
       </Route>
     </Routes>

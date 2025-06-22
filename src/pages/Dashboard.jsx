@@ -11,7 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line, Bar, Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
+import { FaDollarSign, FaChartLine, FaStar, FaRocket } from "react-icons/fa";
 
 ChartJS.register(
   CategoryScale,
@@ -27,123 +28,75 @@ ChartJS.register(
 
 const Dashboard = () => {
   const cards = [
-    { title: "Total Sales", value: "$560K" },
-    { title: "Total Profit", value: "$185K" },
-    { title: "Total Cost", value: "$375K" },
-    { title: "Revenue", value: "$742K" },
-    { title: "Net Income", value: "$150K" },
-    { title: "Today", value: "$4600" },
+    { title: "Total Orders", value: "$12,750", icon: <FaDollarSign className="text-indigo-600 text-2xl" /> },
+    { title: "Revenue", value: "$5,600", icon: <FaChartLine className="text-indigo-600 text-2xl" /> },
+    { title: "Kepuasan Pelanggan", value: "4.9/5⭐", icon: <FaStar className="text-yellow-400 text-2xl" /> },
+    { title: "Popular Service", value: "Express", icon: <FaRocket className="text-indigo-600 text-2xl" /> },
   ];
 
-  const lineData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  const ordersData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul"],
     datasets: [
       {
-        label: "Sales",
-        data: [90, 85, 99, 88, 95, 98, 100, 97],
-        borderColor: "#6366F1",
-        backgroundColor: "rgba(99, 102, 241, 0.2)",
-        fill: true,
-        tension: 0.4,
-        pointRadius: 3,
+        label: "Deposit",
+        backgroundColor: "#06b6d4",
+        borderRadius: 999,
+        data: [300, 250, 280, 310, 150, 290, 310],
       },
       {
-        label: "Cost",
-        data: [72, 69, 81, 66, 75, 79, 82, 80],
-        borderColor: "#60A5FA",
-        backgroundColor: "rgba(96, 165, 250, 0.2)",
-        fill: true,
-        tension: 0.4,
-        pointRadius: 3,
+        label: "Withdraw",
+        backgroundColor: "#4f46e5",
+        borderRadius: 999,
+        data: [200, 180, 210, 240, 120, 220, 270],
       },
     ],
   };
 
-  const doughnutData = {
-    labels: ["Fashion", "Accessories"],
-    datasets: [
-      {
-        data: [251, 176],
-        backgroundColor: ["#6366F1", "#93C5FD"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const conversionsData = {
-    labels: ["S", "M", "T", "W", "T", "F", "S"],
-    datasets: [
-      {
-        label: "Visitors",
-        data: [100, 120, 90, 130, 110, 115, 125],
-        backgroundColor: "#A5B4FC",
-      },
-      {
-        label: "Conversions",
-        data: [60, 80, 50, 70, 60, 75, 85],
-        backgroundColor: "#60A5FA",
-      },
-    ],
-  };
+  const topService = [
+    { name: "Express", length: 300, color: "bg-indigo-600" },
+    { name: "Reguler", length: 250, color: "bg-orange-400" },
+    { name: "Cuci Lipat", length: 180, color: "bg-indigo-600" },
+    { name: "Strika Saja", length: 130, color: "bg-orange-400" },
+  ];
 
   return (
     <div className="p-4 space-y-6">
-      <h1 className="text-xl font-bold">Hello Aisah!</h1>
+      <h1 className="text-2xl font-bold">Dashboard</h1>
 
-      {/* Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {cards.map((card, i) => (
-          <div
-            key={i}
-            className="bg-white rounded-lg shadow p-3 text-center"
-          >
-            <p className="text-xs text-gray-500">{card.title}</p>
-            <h2 className="text-lg font-bold text-indigo-600">{card.value}</h2>
+          <div key={i} className="bg-white rounded-xl shadow p-4 flex flex-col items-center text-center">
+            <div className="mb-2">{card.icon}</div>
+            <p className="text-sm text-gray-500">{card.title}</p>
+            <h2 className="text-xl font-bold text-indigo-600">{card.value}</h2>
           </div>
         ))}
       </div>
 
-      {/* Gross Sales Chart - Full Width */}
-      <div className="bg-white rounded-lg shadow p-4 w-full">
-        <h2 className="font-semibold text-sm mb-2">Gross Sales</h2>
+      <h2 className="font-semibold text-sm mt-8 mb-2">Orders Per Month</h2>
+      <div className="bg-white rounded-xl shadow p-4">
         <div className="w-full h-[300px]">
-          <Line data={lineData} options={{ responsive: true, maintainAspectRatio: false }} />
+          <Bar data={ordersData} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
       </div>
 
-      {/* Website Visitors & History */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow p-3 text-center">
-          <p className="text-xs text-gray-500">Website Visitors</p>
-          <h2 className="text-xl font-bold">750K</h2>
-        </div>
-        <div className="bg-white rounded-lg shadow p-3 text-center">
-          <p className="text-xs text-gray-500">New Customers</p>
-          <h2 className="text-xl font-bold">7,500</h2>
-        </div>
-        <div className="bg-white rounded-lg shadow p-3 text-sm">
-          <h2 className="font-semibold mb-1">Histori</h2>
-          <ul className="space-y-1">
-            <li>✅ $2400 Purchase - 11 JUL</li>
-            <li>🛒 New order #8744152 - 11 JUL</li>
-            <li>👤 New user - 11 JUL</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Earnings + Full Width Conversions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-white rounded-lg shadow p-3">
-          <h2 className="text-sm font-semibold mb-2">Earnings</h2>
-          <div className="h-40">
-            <Doughnut data={doughnutData} options={{ maintainAspectRatio: false }} />
-          </div>
-        </div>
-        <div className="bg-white rounded-lg shadow p-3 w-full">
-          <h2 className="text-sm font-semibold mb-2">Conversions</h2>
-          <div className="h-40">
-            <Bar data={conversionsData} options={{ responsive: true, maintainAspectRatio: false }} />
-          </div>
+      <h2 className="font-semibold text-sm mt-8 mb-2">Top Service</h2>
+      <div className="bg-white rounded-xl shadow p-4">
+        <div className="space-y-3">
+          {topService.map((service, index) => (
+            <div key={index}>
+              <div className="flex justify-between text-sm mb-1">
+                <span>{service.name}</span>
+                <span>{service.length}</span>
+              </div>
+              <div className="w-full h-3 bg-gray-200 rounded-full">
+                <div
+                  className={`${service.color} h-3 rounded-full`}
+                  style={{ width: `${(service.length / 300) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

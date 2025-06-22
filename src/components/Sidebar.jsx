@@ -23,6 +23,10 @@ const menuItems = [
   { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
   { name: 'order', icon: <ShoppingCart />, path: '/Order' },
   { name: 'Transaksi', icon: <User />, path: '/transaksi' }, 
+  { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
+  { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
+  { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
+
 ];
 
  
