@@ -252,5 +252,4 @@ const ContentManagement = () => {
     </div>
   );
 };
-
 export default ContentManagement;
