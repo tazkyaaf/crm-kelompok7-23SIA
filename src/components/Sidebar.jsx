@@ -1,54 +1,57 @@
 import {
   LayoutDashboard,
-  Users,         // untuk pelanggan
-  ShoppingCart,  // untuk penjualan
-  Box,           // untuk produk
-  BarChart2,     // untuk laporan
-  Settings,      // untuk pengaturan akun
-  User,
-  BadgePercent ,
-  LogIn,
-  UserPlus,
-  ShoppingBag,
-} from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+  Users,           // Workflow Development
+  ShoppingCart,   // Penjualan, Order, Invoicing
+  Box,            // Produk
+  BarChart2,      // Laporan
+  Settings,       // Pengaturan Akun, Service Configuration
+  User,           // Produksi, Transaksi
+  BadgePercent,
+  LogIn,          // Sign In
+  UserPlus,       // Pelanggan, Kasir, Sign Up
+  ShoppingBag,    // Manajemen Diskon
+  Share2,         // Social Media Management
+  Gift,           // Loyalty Management
+} from 'lucide-react';
+
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 
 const menuItems = [
   { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
   { name: 'Produk', icon: <Box />, path: '/produkk' },
   { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
-  { name: 'Produksi', icon: <User />, path: '/produksi' }, 
+  { name: 'Produksi', icon: <User />, path: '/produksi' },
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
   { name: 'Kasir', icon: <UserPlus />, path: '/kasir' },
   { name: 'Manajemen Diskon', icon: <ShoppingBag />, path: '/management-diskon' },
-  { name: 'order', icon: <ShoppingCart />, path: '/Order' },
-  { name: 'Transaksi', icon: <User />, path: '/transaksi' }, 
+  { name: 'Order', icon: <ShoppingCart />, path: '/Order' },
+  { name: 'Transaksi', icon: <User />, path: '/transaksi' },
   { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
   { name: 'Order Management', icon: <FaShoppingCart />, path: '/order' },
   { name: 'Contact Management', icon: <FaPhoneAlt />, path: '/contact' },
-  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' }
-
+  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' },
+  { name: 'Social Media', icon: <Share2 />, path: '/socialmediamanagement' },
+  { name: 'Loyalty Program', icon: <Gift />, path: '/loyaltymanagement' },
 ];
-
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
   { name: 'Sign In', icon: <LogIn />, path: '/signin' },
   { name: 'Sign Up', icon: <UserPlus />, path: '/signup' },
-]
+];
 
 const Sidebar = () => {
-  const location = useLocation()
-
-  const isActive = (path) => location.pathname === path
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   return (
     <aside className="bg-white w-64 h-screen shadow-lg px-4 py-6 hidden md:block">
       <div className="text-xl font-bold mb-8 text-purple-700">UMKM CRM</div>
+
       <nav className="space-y-1">
         {menuItems.map((item) => (
           <Link
@@ -84,9 +87,7 @@ const Sidebar = () => {
         ))}
       </nav>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
-
-
+export default Sidebar;
