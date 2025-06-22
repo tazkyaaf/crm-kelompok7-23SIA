@@ -52,79 +52,6 @@ const Dashboard = () => {
     ],
   };
 
-  const stats = [
-    {
-      label: "Pendapatan Hari Ini",
-      value: "$53,000",
-      percent: "+55%",
-      color: "text-green-600",
-      percentColor: "text-green-500",
-    },
-    {
-      label: "Pengguna Hari Ini",
-      value: "2,300",
-      percent: "+3%",
-      color: "text-blue-600",
-      percentColor: "text-blue-500",
-    },
-    {
-      label: "Klien Baru",
-      value: "+3,462",
-      percent: "-2%",
-      color: "text-red-600",
-      percentColor: "text-red-500",
-    },
-    {
-      label: "Penjualan",
-      value: "$103,430",
-      percent: "+5%",
-      color: "text-purple-600",
-      percentColor: "text-purple-500",
-    },
-  ];
-
-  const barData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
-    datasets: [
-      {
-        label: "Penjualan (dalam ribuan $)",
-        data: [12, 19, 14, 17, 22, 30, 28, 26, 32, 35, 40, 45],
-        backgroundColor: "rgba(139, 92, 246, 0.7)", // purple
-      },
-    ],
-  };
-
-  const barOptions = {
-    responsive: true,
-    plugins: {
-      legend: { position: "top" },
-      title: { display: true, text: "Penjualan Bulanan Tahun Ini" },
-    },
-  };
-
-  const lineData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
-    datasets: [
-      {
-        label: "Jumlah Pelanggan",
-        data: [50, 75, 120, 180, 220, 260, 300, 350, 400, 430, 460, 500],
-        borderColor: "rgba(59, 130, 246, 1)",
-        backgroundColor: "rgba(59, 130, 246, 0.3)",
-        fill: true,
-        tension: 0.3,
-        pointRadius: 4,
-      },
-    ],
-  };
-
-  const lineOptions = {
-    responsive: true,
-    plugins: {
-      legend: { position: "top" },
-      title: { display: true, text: "Pertumbuhan Pelanggan Tahun Ini" },
-    },
-  };
-
   const topService = [
     { name: "Express", length: 300, color: "bg-indigo-600" },
     { name: "Reguler", length: 250, color: "bg-orange-400" },
@@ -136,7 +63,6 @@ const Dashboard = () => {
     <div className="p-4 space-y-6">
       <h1 className="text-2xl font-bold">Dashboard</h1>
 
-      {/* Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {cards.map((card, i) => (
           <div key={i} className="bg-white rounded-xl shadow p-4 flex flex-col items-center text-center">
@@ -147,45 +73,14 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* Statistik Utama */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map(({ label, value, percent, color, percentColor }) => (
-          <div key={label} className="bg-white rounded-xl shadow p-5">
-            <p className="text-sm text-gray-500">{label}</p>
-            <h2 className={`text-2xl font-bold flex items-center gap-2 ${color}`}>
-              {value}
-              <span className={`text-xs font-semibold ${percentColor}`}>{percent}</span>
-            </h2>
-          </div>
-        ))}
-      </div>
-
-      {/* Chart Orders */}
-      <h2 className="font-semibold text-sm mt-8 mb-2">Orders Per Month</h2>
+      <h2 className="font-semibold text-xl mt-8 mb-2">Orders Per Month</h2>
       <div className="bg-white rounded-xl shadow p-4">
         <div className="w-full h-[300px]">
           <Bar data={ordersData} options={{ responsive: true, maintainAspectRatio: false }} />
         </div>
       </div>
 
-      {/* Chart Bar Penjualan */}
-      <h2 className="font-semibold text-sm mt-8 mb-2">Penjualan Bulanan</h2>
-      <div className="bg-white rounded-xl shadow p-4">
-        <div className="w-full h-[300px]">
-          <Bar data={barData} options={barOptions} />
-        </div>
-      </div>
-
-      {/* Chart Line Pelanggan */}
-      <h2 className="font-semibold text-sm mt-8 mb-2">Pertumbuhan Pelanggan</h2>
-      <div className="bg-white rounded-xl shadow p-4">
-        <div className="w-full h-[300px]">
-          <Bar data={lineData} options={lineOptions} />
-        </div>
-      </div>
-
-      {/* Top Service */}
-      <h2 className="font-semibold text-sm mt-8 mb-2">Top Service</h2>
+      <h2 className="font-semibold text-xl mt-8 mb-2">Top Service</h2>
       <div className="bg-white rounded-xl shadow p-4">
         <div className="space-y-3">
           {topService.map((service, index) => (
