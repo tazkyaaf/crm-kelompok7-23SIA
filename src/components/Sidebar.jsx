@@ -1,5 +1,6 @@
 import {
   LayoutDashboard,
+<<<<<<< HEAD
   Users,
   ShoppingCart,
   Settings,
@@ -7,10 +8,25 @@ import {
   Gift,
   LogIn,
   UserPlus
+=======
+  Users,           // Workflow Development
+  ShoppingCart,   // Penjualan, Order, Invoicing
+  Box,            // Produk
+  BarChart2,      // Laporan
+  Settings,       // Pengaturan Akun, Service Configuration
+  User,           // Produksi, Transaksi
+  BadgePercent,
+  LogIn,          // Sign In
+  UserPlus,       // Pelanggan, Kasir, Sign Up
+  ShoppingBag,    // Manajemen Diskon
+  Share2,         // Social Media Management
+  Gift,           // Loyalty Management
+>>>>>>> main
 } from 'lucide-react';
 
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
+<<<<<<< HEAD
 import htmLogo from '../assets/logo1.png'; // Sesuaikan path logomu
 
 const menuItems = [
@@ -29,14 +45,33 @@ const menuItems = [
 const accountItems = [
   { name: 'Sign In', icon: <LogIn size={18} />, path: '/signin' },
   { name: 'Sign Up', icon: <UserPlus size={18} />, path: '/signup' },
+=======
+
+const menuItems = [
+  { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
+  { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
+  { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
+  { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
+  { name: 'Order Management', icon: <FaShoppingCart />, path: '/order' },
+  { name: 'Contact Management', icon: <FaPhoneAlt />, path: '/contact' },
+  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' },
+  { name: 'Social Media', icon: <Share2 />, path: '/socialmediamanagement' },
+  { name: 'Loyalty Program', icon: <Gift />, path: '/loyaltymanagement' },
+];
+
+const accountItems = [
+  { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
+  { name: 'Sign In', icon: <LogIn />, path: '/signin' },
+  { name: 'Sign Up', icon: <UserPlus />, path: '/signup' },
+>>>>>>> main
 ];
 
 const Sidebar = () => {
-  const location = useLocation()
-
-  const isActive = (path) => location.pathname === path
+  const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   return (
+<<<<<<< HEAD
     <aside className="bg-white w-64 h-screen px-4 py-6 hidden md:flex flex-col shadow-sm">
       {/* Logo & Branding */}
       <div className="flex items-center justify-center mb-10">
@@ -45,6 +80,12 @@ const Sidebar = () => {
 
       {/* Menu Utama */}
       <nav className="flex-1 space-y-1">
+=======
+    <aside className="bg-white w-64 h-screen shadow-lg px-4 py-6 hidden md:block">
+      <div className="text-xl font-bold mb-8 text-purple-700">UMKM CRM</div>
+
+      <nav className="space-y-1">
+>>>>>>> main
         {menuItems.map((item) => (
           <Link
             key={item.name}
@@ -80,7 +121,14 @@ const Sidebar = () => {
         ))}
       </nav>
     </aside>
+<<<<<<< HEAD
   )
 }
 
 export default Sidebar
+=======
+  );
+};
+
+export default Sidebar;
+>>>>>>> main
