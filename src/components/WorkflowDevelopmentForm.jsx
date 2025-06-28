@@ -1,4 +1,3 @@
-// components/WorkflowDevelopmentForm.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +5,8 @@ const WorkflowManagementForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     id: "",
-    order: "",
-    status: "",
+    order: "Express",
+    status: "Dijemput",
     waktuUpdate: "",
     petugas: "",
   });
@@ -23,13 +22,14 @@ const WorkflowManagementForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Data disimpan:", formData);
-    navigate("/workflow"); // kembali ke halaman utama setelah simpan
+    navigate("/workflow"); // kembali ke halaman utama
   };
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow rounded">
       <h2 className="text-lg font-bold mb-4">Tambah Petugas Workflow</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+
         <input
           name="id"
           value={formData.id}
@@ -37,20 +37,32 @@ const WorkflowManagementForm = () => {
           placeholder="ID"
           className="w-full border px-3 py-2 rounded"
         />
-        <input
+
+        <select
           name="order"
           value={formData.order}
           onChange={handleChange}
-          placeholder="Order"
           className="w-full border px-3 py-2 rounded"
-        />
-        <input
+        >
+          <option value="Express">Express</option>
+          <option value="Setrika">Setrika</option>
+          <option value="Reguler">Reguler</option>
+          <option value="Cuci Kering Lipat">Cuci Kering Lipat</option>
+        </select>
+
+        <select
           name="status"
           value={formData.status}
           onChange={handleChange}
-          placeholder="Status"
           className="w-full border px-3 py-2 rounded"
-        />
+        >
+          <option value="Dijemput">Dijemput</option>
+          <option value="Diterima">Diterima</option>
+          <option value="Diproses">Diproses</option>
+          <option value="Diantar">Diantar</option>
+          <option value="Selesai">Selesai</option>
+        </select>
+
         <input
           type="time"
           name="waktuUpdate"
@@ -58,6 +70,7 @@ const WorkflowManagementForm = () => {
           onChange={handleChange}
           className="w-full border px-3 py-2 rounded"
         />
+
         <input
           name="petugas"
           value={formData.petugas}
@@ -65,6 +78,7 @@ const WorkflowManagementForm = () => {
           placeholder="Petugas"
           className="w-full border px-3 py-2 rounded"
         />
+
         <div className="flex justify-end space-x-3">
           <button
             type="button"

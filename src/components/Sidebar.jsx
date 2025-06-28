@@ -22,7 +22,6 @@ const menuItems = [
   { name: 'Content Management', icon: <FaFileAlt size={16} />, path: '/content' },
   { name: 'Social Media Management', icon: <Share2 size={18} />, path: '/socialmediamanagement' },
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
-  { name: 'User', icon: <Gift size={18} />, path: '/user' },
 ];
 
 const accountItems = [
