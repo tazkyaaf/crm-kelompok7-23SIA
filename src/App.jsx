@@ -30,6 +30,7 @@ import Order from "./customer/pages/Order";
 function App() {
   return (
     <Routes>
+      
       {/* Halaman Customer */}
       <Route element={<CustomerLayout />}>
         <Route path="/home" element={<Home />} />
@@ -39,11 +40,13 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/signin/admin" element={<SignIn role="admin" />} />
         <Route path="/signin/customer" element={<SignIn role="customer" />} />
+         <Route path="/" element={<Home />} />
       </Route>
 
       {/* Halaman Admin */}
       <Route element={<AdminRoute />}>
         <Route element={<MainLayout />}>
+        
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/invoicing" element={<InvoicingPage />} />
           <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />
