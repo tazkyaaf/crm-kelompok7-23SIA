@@ -17,6 +17,7 @@ const OrderStatusModal = ({ isOpen, onClose, order }) => {
       minimumFractionDigits: 0,
     }).format(amount);
 
+    
   const getMembershipIcon = (level) => {
     switch (level) {
       case "basic":

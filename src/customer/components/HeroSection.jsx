@@ -38,6 +38,7 @@ const HeroSection = ({ onSeeAll }) => (
           <img src="/assets/hero-icon2.png" alt="Iron Icon" className="w-full" />
         </div>
       </div>
+    
     </div>
 
   {/* Gelembung besar dengan gradasi di tengah lingkaran */}

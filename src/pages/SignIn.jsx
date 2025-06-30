@@ -129,7 +129,7 @@ const SignIn = () => {
             Daftar
           </button>
         </div>
-
+        
         {activeTab === 'login' && (
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>

@@ -323,6 +323,7 @@ export default function FAQSection() {
     </div>
   </div>
 </div>
+
       </div>
     </section>
   );

@@ -19,6 +19,7 @@ const CustomerLayout = () => {
     navigate("/home");
   };
 
+  
   const handleLogin = () => navigate("/signin/customer");
 
   return (

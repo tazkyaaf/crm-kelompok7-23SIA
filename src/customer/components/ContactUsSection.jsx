@@ -245,6 +245,7 @@ const ContactUsSection = () => {
       color: "#a0aec0"
     }} 
   />
+  
   <textarea
     name="message"
     placeholder="Masukkan Pesan"

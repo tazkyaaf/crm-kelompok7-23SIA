@@ -625,6 +625,7 @@ const MembershipRegistrationModal = ({ isOpen, onClose, selectedMembership }) =>
   );
 };
 
+
 // Ekspor komponen
 export default MembershipCard;
 export { MembershipRegistrationModal };

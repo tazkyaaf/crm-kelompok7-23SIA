@@ -80,6 +80,7 @@ export default function Footer() {
             </ul>
           </div>
 
+
           {/* Check in visit */}
           <div>
             <h4 className="font-bold text-white mb-4">Check in visit</h4>
