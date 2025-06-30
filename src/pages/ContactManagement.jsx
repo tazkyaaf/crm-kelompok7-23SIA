@@ -54,7 +54,9 @@ const ContactManagement = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (editingContact) {
-      setContacts(prev => prev.map(contact => contact.id_customer === editingContact.id_customer ? { ...contact, ...formValues } : contact));
+      setContacts(prev => prev.map(contact => 
+        contact.id_customer === editingContact.id_customer ? { ...contact, ...formValues } : contact
+      ));
     } else {
       const newId = `CS${String(contacts.length + 1).padStart(3, '0')}`;
       setContacts(prev => [...prev, { id_customer: newId, ...formValues }]);
@@ -68,7 +70,10 @@ const ContactManagement = () => {
       <div className="bg-white rounded-2xl p-6 shadow">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-base font-medium">Daftar Kontak</h2>
-          <button onClick={handleAddContactClick} className="bg-[#4c44c7] text-white px-4 py-2 rounded-full shadow flex items-center gap-2 hover:bg-[#3c38a5]">
+          <button 
+            onClick={handleAddContactClick} 
+            className="bg-[#4c44c7] text-white px-4 py-2 rounded-full shadow flex items-center gap-2 hover:bg-[#3c38a5]"
+          >
             <FaPlus /> Tambah Contact
           </button>
         </div>
@@ -95,14 +100,24 @@ const ContactManagement = () => {
                     <a href={`mailto:${contact.email}`}>{contact.email}</a>
                   </td>
                   <td className="py-2 px-4">{contact.no_hp}</td>
-                  <td className="py-2 px-4">{new Date(contact.tanggal_terakhir_kontak).toLocaleDateString('id-ID')}</td>
+                  <td className="py-2 px-4">
+                    {new Date(contact.tanggal_terakhir_kontak).toLocaleDateString('id-ID')}
+                  </td>
                   <td className="py-2 px-4">"{contact.pesan_terakhir}"</td>
                   <td className="py-2 px-4">
                     <div className="flex gap-3">
-                      <button onClick={() => handleEditContactClick(contact)} className="text-blue-500 hover:text-blue-700" title="Edit">
+                      <button 
+                        onClick={() => handleEditContactClick(contact)} 
+                        className="text-blue-500 hover:text-blue-700" 
+                        title="Edit"
+                      >
                         <FaEdit />
                       </button>
-                      <button onClick={() => handleDeleteContact(contact.id_customer)} className="text-red-500 hover:text-red-700" title="Hapus">
+                      <button 
+                        onClick={() => handleDeleteContact(contact.id_customer)} 
+                        className="text-red-500 hover:text-red-700" 
+                        title="Hapus"
+                      >
                         <FaTrash />
                       </button>
                     </div>
@@ -119,18 +134,72 @@ const ContactManagement = () => {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg shadow-xl">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">{editingContact ? 'Edit Kontak' : 'Tambah Kontak'}</h3>
-              <button onClick={handleCloseForm} className="text-2xl text-gray-400 hover:text-red-600">&times;</button>
+              <h3 className="text-lg font-semibold">
+                {editingContact ? 'Edit Kontak' : 'Tambah Kontak'}
+              </h3>
+              <button 
+                onClick={handleCloseForm} 
+                className="text-2xl text-gray-400 hover:text-red-600"
+              >
+                &times;
+              </button>
             </div>
             <form onSubmit={handleSubmitForm} className="grid gap-4">
-              <input name="nama" placeholder="Nama" value={formValues.nama} onChange={handleChange} className="border rounded-lg px-4 py-2" required />
-              <input name="email" type="email" placeholder="Email" value={formValues.email} onChange={handleChange} className="border rounded-lg px-4 py-2" required />
-              <input name="no_hp" type="tel" placeholder="No. HP" value={formValues.no_hp} onChange={handleChange} className="border rounded-lg px-4 py-2" required />
-              <input name="tanggal_terakhir_kontak" type="date" value={formValues.tanggal_terakhir_kontak} onChange={handleChange} className="border rounded-lg px-4 py-2" required />
-              <textarea name="pesan_terakhir" rows="3" placeholder="Pesan Terakhir" value={formValues.pesan_terakhir} onChange={handleChange} className="border rounded-lg px-4 py-2" required />
+              <input 
+                name="nama" 
+                placeholder="Nama" 
+                value={formValues.nama} 
+                onChange={handleChange} 
+                className="border rounded-lg px-4 py-2" 
+                required 
+              />
+              <input 
+                name="email" 
+                type="email" 
+                placeholder="Email" 
+                value={formValues.email} 
+                onChange={handleChange} 
+                className="border rounded-lg px-4 py-2" 
+                required 
+              />
+              <input 
+                name="no_hp" 
+                type="tel" 
+                placeholder="No. HP" 
+                value={formValues.no_hp} 
+                onChange={handleChange} 
+                className="border rounded-lg px-4 py-2" 
+                required 
+              />
+              <input 
+                name="tanggal_terakhir_kontak" 
+                type="date" 
+                value={formValues.tanggal_terakhir_kontak} 
+                onChange={handleChange} 
+                className="border rounded-lg px-4 py-2" 
+                required 
+              />
+              <textarea 
+                name="pesan_terakhir" 
+                rows="3" 
+                placeholder="Pesan Terakhir" 
+                value={formValues.pesan_terakhir} 
+                onChange={handleChange} 
+                className="border rounded-lg px-4 py-2" 
+                required 
+              />
               <div className="flex justify-end gap-3 mt-2">
-                <button type="button" onClick={handleCloseForm} className="border px-4 py-2 rounded text-gray-600 hover:bg-gray-100">Batal</button>
-                <button type="submit" className="bg-[#4c44c7] text-white px-4 py-2 rounded hover:bg-[#3a35a5]">
+                <button 
+                  type="button" 
+                  onClick={handleCloseForm} 
+                  className="border px-4 py-2 rounded text-gray-600 hover:bg-gray-100"
+                >
+                  Batal
+                </button>
+                <button 
+                  type="submit" 
+                  className="bg-[#4c44c7] text-white px-4 py-2 rounded hover:bg-[#3a35a5]"
+                >
                   {editingContact ? 'Simpan Perubahan' : 'Simpan Kontak'}
                 </button>
               </div>

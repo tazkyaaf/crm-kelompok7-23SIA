@@ -1,32 +1,17 @@
 import {
   LayoutDashboard,
-<<<<<<< HEAD
   Users,
   ShoppingCart,
   Settings,
   Share2,
   Gift,
   LogIn,
-  UserPlus
-=======
-  Users,           // Workflow Development
-  ShoppingCart,   // Penjualan, Order, Invoicing
-  Box,            // Produk
-  BarChart2,      // Laporan
-  Settings,       // Pengaturan Akun, Service Configuration
-  User,           // Produksi, Transaksi
-  BadgePercent,
-  LogIn,          // Sign In
-  UserPlus,       // Pelanggan, Kasir, Sign Up
-  ShoppingBag,    // Manajemen Diskon
-  Share2,         // Social Media Management
-  Gift,           // Loyalty Management
->>>>>>> main
+  UserPlus,
+  LogOut
 } from 'lucide-react';
 
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-<<<<<<< HEAD
 import htmLogo from '../assets/logo1.png'; // Sesuaikan path logomu
 
 const menuItems = [
@@ -34,8 +19,8 @@ const menuItems = [
   { name: 'Invoicing', icon: <ShoppingCart size={18} />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings size={18} />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users size={18} />, path: '/workflow' },
-  { name: 'Contact Management', icon: <FaPhoneAlt size={16} />, path: '/contact' },
-  { name: 'Order Management', icon: <FaShoppingCart size={16} />, path: '/order' },
+  { name: 'Contact Management', icon: <FaPhoneAlt size={16} />, path: '/contactManagement' },
+  { name: 'Order Management', icon: <FaShoppingCart size={16} />, path: '/orderManagement' },
   { name: 'Content Management', icon: <FaFileAlt size={16} />, path: '/content' },
   { name: 'Social Media Management', icon: <Share2 size={18} />, path: '/socialmediamanagement' },
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
@@ -45,25 +30,7 @@ const menuItems = [
 const accountItems = [
   { name: 'Sign In', icon: <LogIn size={18} />, path: '/signin' },
   { name: 'Sign Up', icon: <UserPlus size={18} />, path: '/signup' },
-=======
-
-const menuItems = [
-  { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
-  { name: 'Invoicing', icon: <ShoppingCart />, path: '/invoicing' },
-  { name: 'Service Configuration', icon: <Settings />, path: '/serviceconfiguration' },
-  { name: 'Workflow Development', icon: <Users />, path: '/workflow' },
-  { name: 'Order Management', icon: <FaShoppingCart />, path: '/order' },
-  { name: 'Contact Management', icon: <FaPhoneAlt />, path: '/contact' },
-  { name: 'Content Management', icon: <FaFileAlt />, path: '/content' },
-  { name: 'Social Media', icon: <Share2 />, path: '/socialmediamanagement' },
-  { name: 'Loyalty Program', icon: <Gift />, path: '/loyaltymanagement' },
-];
-
-const accountItems = [
-  { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
-  { name: 'Sign In', icon: <LogIn />, path: '/signin' },
-  { name: 'Sign Up', icon: <UserPlus />, path: '/signup' },
->>>>>>> main
+  { name: 'Logout', icon: <LogOut size={18} />, action: 'logout' },
 ];
 
 const Sidebar = () => {
@@ -71,7 +38,6 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-<<<<<<< HEAD
     <aside className="bg-white w-64 h-screen px-4 py-6 hidden md:flex flex-col shadow-sm">
       {/* Logo & Branding */}
       <div className="flex items-center justify-center mb-10">
@@ -80,12 +46,6 @@ const Sidebar = () => {
 
       {/* Menu Utama */}
       <nav className="flex-1 space-y-1">
-=======
-    <aside className="bg-white w-64 h-screen shadow-lg px-4 py-6 hidden md:block">
-      <div className="text-xl font-bold mb-8 text-purple-700">UMKM CRM</div>
-
-      <nav className="space-y-1">
->>>>>>> main
         {menuItems.map((item) => (
           <Link
             key={item.name}
@@ -105,30 +65,41 @@ const Sidebar = () => {
       {/* Section Akun */}
       <div className="text-xs text-gray-400 mt-6 mb-2 px-3">ACCOUNT</div>
       <nav className="space-y-1">
-        {accountItems.map((item) => (
-          <Link
-            key={item.name}
-            to={item.path}
-            className={`flex items-center gap-3 px-3 py-2 rounded-md transition font-medium text-sm ${
-              isActive(item.path)
-                ? 'bg-blue-50 text-blue-600 font-semibold'
-                : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
-            }`}
-          >
-            <div className="w-5 h-5 flex items-center justify-center">{item.icon}</div>
-            {item.name}
-          </Link>
-        ))}
+        {accountItems.map((item) => {
+          if (item.action === 'logout') {
+            return (
+              <button
+                key={item.name}
+                onClick={() => {
+                  localStorage.removeItem('userToken'); // Atur sesuai token kamu
+                  window.location.href = '/home'; // Arahkan ke halaman customer
+                }}
+                className="flex items-center w-full gap-3 px-3 py-2 rounded-md transition font-medium text-sm text-gray-400 hover:text-blue-600 hover:bg-blue-50"
+              >
+                <div className="w-5 h-5 flex items-center justify-center">{item.icon}</div>
+                {item.name}
+              </button>
+            );
+          }
+
+          return (
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`flex items-center gap-3 px-3 py-2 rounded-md transition font-medium text-sm ${
+                isActive(item.path)
+                  ? 'bg-blue-50 text-blue-600 font-semibold'
+                  : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
+              }`}
+            >
+              <div className="w-5 h-5 flex items-center justify-center">{item.icon}</div>
+              {item.name}
+            </Link>
+          );
+        })}
       </nav>
     </aside>
-<<<<<<< HEAD
-  )
-}
-
-export default Sidebar
-=======
   );
 };
 
 export default Sidebar;
->>>>>>> main
