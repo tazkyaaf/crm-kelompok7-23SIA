@@ -5,7 +5,7 @@ const AdminRoute = () => {
   const user = JSON.parse(localStorage.getItem("user")); // atau dari context/auth
 
   if (!user) {
-    return <Navigate to="/signin/admin" />;
+    return <Navigate to="/" />;
   }
 
   if (user.role !== "admin") {

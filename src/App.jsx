@@ -44,7 +44,7 @@ function App() {
       {/* Halaman Admin */}
       <Route element={<AdminRoute />}>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/invoicing" element={<InvoicingPage />} />
           <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />
           <Route path="/workflow" element={<WorkflowDevelopment />} />
