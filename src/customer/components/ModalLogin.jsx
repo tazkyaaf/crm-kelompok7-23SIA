@@ -11,5 +11,4 @@ const ModalLogin = ({ onClose }) => (
   </div>
 );
 
-
 export default ModalLogin;

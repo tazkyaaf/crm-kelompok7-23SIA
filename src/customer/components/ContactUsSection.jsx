@@ -10,6 +10,7 @@ const ContactUsSection = () => {
     message: "",
   });
 
+  
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {

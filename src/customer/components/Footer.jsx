@@ -8,6 +8,7 @@ export default function Footer() {
     checkIn: ["Drop off", "Status"],
   };
 
+  
   return (
     <footer className="bg-gradient-to-r from-blue-400 to-blue-500 py-16">
       <div className="container mx-auto px-4">

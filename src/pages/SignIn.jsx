@@ -17,7 +17,6 @@ const SignIn = () => {
     password: '',
     confirmPassword: ''
   });
-
   const handleLoginChange = (e) => {
     setLoginData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };

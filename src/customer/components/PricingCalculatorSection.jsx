@@ -15,6 +15,7 @@ export default function PricingCalculatorSection() {
     { value: "setrika", label: "Setrika Saja", price: 4000 },
   ];
 
+  
   const calculatePrice = () => {
     const selectedService = serviceTypes.find((s) => s.value === serviceType);
     if (selectedService && weight) {

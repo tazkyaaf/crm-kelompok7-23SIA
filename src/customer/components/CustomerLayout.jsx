@@ -12,6 +12,7 @@ const CustomerLayout = () => {
     if (stored) setUser(stored);
   }, []);
 
+  
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);

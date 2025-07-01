@@ -13,6 +13,7 @@ const MembershipCard = ({ title, icon, benefit, price, button, active, subtitle 
     loyal: <FaCrown className="w-6 h-6 mr-2" />,
   };
 
+  
   return (
     <>
       <div

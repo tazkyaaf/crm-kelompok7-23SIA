@@ -7,7 +7,6 @@ import { FaSearch, FaFilter, FaBox, FaClock, FaCheckCircle, FaExclamationCircle,
 import * as Select from '@radix-ui/react-select';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { Input } from "@headlessui/react";
-
 // Mock data for orders
 const mockOrders = [
   {
