@@ -1,7 +1,7 @@
 import { Search, Settings, Bell } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import logo from "../assets/logo1.png";         // Pastikan file ada di folder src/assets/
-import profilePic from "../assets/logo1.png";   // Ganti dengan file foto profil jika ada
+import logo from "../assets/logo1.png";         // Pastikan file ada
+import profilePic from "../assets/logo1.png";   // Ganti kalau ada foto lain
 
 // Mapping path ke judul halaman
 const pageTitles = {
@@ -27,14 +27,12 @@ const Header = () => {
     <header className="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-10">
       {/* Kiri: Logo + Judul */}
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-        </div>
-        <h1 className="ml-6 text-lg font-semibold text-gray-800">{pageTitle}</h1>
+        <img src={logo} alt="Logo" className="w-8 h-8" />
+        <h1 className="text-lg font-semibold text-gray-800">{pageTitle}</h1>
       </div>
 
       {/* Kanan: Search + Ikon + Profil */}
       <div className="flex items-center gap-4">
-        {/* Search Bar */}
         <div className="relative">
           <input
             type="text"
@@ -44,7 +42,6 @@ const Header = () => {
           <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-500" />
         </div>
 
-        {/* Icon Tombol */}
         <button className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full hover:bg-blue-100">
           <Settings className="w-4 h-4 text-gray-700" />
         </button>
@@ -52,7 +49,6 @@ const Header = () => {
           <Bell className="w-4 h-4 text-gray-700" />
         </button>
 
-        {/* Foto Profil */}
         <img
           src={profilePic}
           alt="Profile"
