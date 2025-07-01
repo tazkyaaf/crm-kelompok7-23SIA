@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Pencil, Trash2, Plus } from "lucide-react";
 
 const LOCAL_KEY_LOYALTY = "loyalty_data";
 const LOCAL_KEY_MEMBER = "loyalty_memberships";
@@ -7,13 +6,30 @@ const LOCAL_KEY_MEMBER = "loyalty_memberships";
 const LoyaltyTabs = () => {
   const [activeTab, setActiveTab] = useState("loyalty");
 
-  // ----- Membership -----
+  // --- Loyalty ---
+  const [loyalties, setLoyalties] = useState(() => {
+    const data = localStorage.getItem(LOCAL_KEY_LOYALTY);
+    return data ? JSON.parse(data) : [];
+  });
+
+  const [loyaltyForm, setLoyaltyForm] = useState({
+    id: "",
+    namapelanggan: "",
+    levelmember: "Basic",
+    jumlahpoint: "",
+    voucer: "",
+    riwayattukar: ""
+  });
+
+  const [editingLoyalty, setEditingLoyalty] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  // --- Membership ---
   const [members, setMembers] = useState(() => {
     const saved = localStorage.getItem(LOCAL_KEY_MEMBER);
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [showMemberForm, setShowMemberForm] = useState(false);
   const [memberForm, setMemberForm] = useState({
     id: "",
     namapelanggan: "",
@@ -23,253 +39,258 @@ const LoyaltyTabs = () => {
     harga: "",
     status: "Diproses",
     tanggalDaftar: "",
-    masaBerlaku: "",
+    masaBerlaku: ""
   });
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_KEY_MEMBER, JSON.stringify(members));
-  }, [members]);
-
-  const saveMember = () => {
-    const data = { ...memberForm };
-    if (!data.namapelanggan || !data.harga || !data.tanggalDaftar) {
-      alert("Harap lengkapi semua data penting!");
-      return;
-    }
-    if (!data.id) data.id = Date.now().toString();
-    const updated = members.some((m) => m.id === data.id)
-      ? members.map((m) => (m.id === data.id ? data : m))
-      : [...members, data];
-    setMembers(updated);
-    setShowMemberForm(false);
-    resetMemberForm();
-  };
-
-  const resetMemberForm = () => {
-    setMemberForm({
-      id: "",
-      namapelanggan: "",
-      email: "",
-      nohp: "",
-      member: "Reguler",
-      harga: "",
-      status: "Diproses",
-      tanggalDaftar: "",
-      masaBerlaku: "",
-    });
-  };
-
-  const deleteMember = (id) => {
-    if (window.confirm("Yakin ingin menghapus?"))
-      setMembers(members.filter((m) => m.id !== id));
-  };
-
-  // ----- Loyalty -----
-  const [loyalties, setLoyalties] = useState(() => {
-    const data = localStorage.getItem(LOCAL_KEY_LOYALTY);
-    return data ? JSON.parse(data) : [];
-  });
-
-  const [showLoyaltyForm, setShowLoyaltyForm] = useState(false);
-  const [loyaltyForm, setLoyaltyForm] = useState({
-    id: "",
-    namapelanggan: "",
-    levelmember: "Basic",
-    jumlahpoint: "",
-    voucer: "",
-    riwayattukar: "",
-  });
+  const [editingMember, setEditingMember] = useState(null);
+  const [showMemberForm, setShowMemberForm] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_KEY_LOYALTY, JSON.stringify(loyalties));
   }, [loyalties]);
 
-  const saveLoyalty = () => {
-    const data = { ...loyaltyForm };
-    if (!data.namapelanggan || !data.jumlahpoint) {
-      alert("Harap isi data pelanggan dan poin!");
-      return;
+  useEffect(() => {
+    localStorage.setItem(LOCAL_KEY_MEMBER, JSON.stringify(members));
+  }, [members]);
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    if (activeTab === "loyalty") {
+      setLoyaltyForm((prev) => ({ ...prev, [name]: value }));
+    } else {
+      setMemberForm((prev) => ({ ...prev, [name]: value }));
     }
-    if (!data.id) data.id = `CS${String(loyalties.length + 1).padStart(3, "0")}`;
-    const updated = loyalties.some((l) => l.id === data.id)
-      ? loyalties.map((l) => (l.id === data.id ? data : l))
-      : [...loyalties, data];
-    setLoyalties(updated);
-    setShowLoyaltyForm(false);
-    resetLoyaltyForm();
   };
 
-  const resetLoyaltyForm = () => {
-    setLoyaltyForm({
-      id: "",
-      namapelanggan: "",
-      levelmember: "Basic",
-      jumlahpoint: "",
-      voucer: "",
-      riwayattukar: "",
-    });
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    if (activeTab === "loyalty") {
+      if (!loyaltyForm.namapelanggan || !loyaltyForm.jumlahpoint) {
+        alert("Harap isi data pelanggan dan poin!");
+        return;
+      }
+      if (editingLoyalty) {
+        setLoyalties((prev) =>
+          prev.map((item) =>
+            item.id === editingLoyalty.id ? { ...loyaltyForm, id: editingLoyalty.id } : item
+          )
+        );
+      } else {
+        const newId = `CS${String(loyalties.length + 1).padStart(3, "0")}`;
+        setLoyalties((prev) => [...prev, { ...loyaltyForm, id: newId }]);
+      }
+      handleCloseForm();
+    } else {
+      if (!memberForm.namapelanggan || !memberForm.harga || !memberForm.tanggalDaftar) {
+        alert("Harap lengkapi semua data penting!");
+        return;
+      }
+      if (editingMember) {
+        setMembers((prev) =>
+          prev.map((m) => (m.id === editingMember.id ? { ...memberForm, id: editingMember.id } : m))
+        );
+      } else {
+        const newId = Date.now().toString();
+        setMembers((prev) => [...prev, { ...memberForm, id: newId }]);
+      }
+      handleCloseForm();
+    }
   };
 
-  const deleteLoyalty = (id) => {
-    if (window.confirm("Yakin ingin hapus?"))
-      setLoyalties(loyalties.filter((l) => l.id !== id));
+  const handleEdit = (item) => {
+    if (activeTab === "loyalty") {
+      setEditingLoyalty(item);
+      setLoyaltyForm(item);
+    } else {
+      setEditingMember(item);
+      setMemberForm(item);
+    }
+    setShowForm(true);
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Yakin ingin menghapus?")) {
+      if (activeTab === "loyalty") {
+        setLoyalties((prev) => prev.filter((item) => item.id !== id));
+      } else {
+        setMembers((prev) => prev.filter((m) => m.id !== id));
+      }
+      handleCloseForm();
+    }
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingLoyalty(null);
+    setEditingMember(null);
+    setLoyaltyForm({ id: "", namapelanggan: "", levelmember: "Basic", jumlahpoint: "", voucer: "", riwayattukar: "" });
+    setMemberForm({ id: "", namapelanggan: "", email: "", nohp: "", member: "Reguler", harga: "", status: "Diproses", tanggalDaftar: "", masaBerlaku: "" });
+  };
+
+  const getStatusClass = (level) => {
+    switch (level) {
+      case "Basic": return "bg-gray-100 text-gray-700";
+      case "Reguler": return "bg-blue-100 text-blue-700";
+      case "Royal": return "bg-yellow-100 text-yellow-700";
+      default: return "bg-gray-100 text-gray-700";
+    }
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-6 max-w-5xl mx-auto">
       <div className="flex space-x-10 border-b mb-6">
-        {["loyalty", "membership"].map((tab) => (
+        {['loyalty', 'membership'].map(tab => (
           <button
             key={tab}
-            className={`pb-2 font-semibold ${
-              activeTab === tab
-                ? "text-blue-600 border-b-2 border-blue-600"
-                : "text-gray-400"
-            }`}
-            onClick={() => {
-              setActiveTab(tab);
-              setShowMemberForm(false);
-              setShowLoyaltyForm(false);
-            }}
+            className={`pb-2 font-semibold ${activeTab === tab ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-400'}`}
+            onClick={() => setActiveTab(tab)}
           >
-            {tab === "loyalty" ? "Loyalty" : "Membership"}
+            {tab === 'loyalty' ? 'Loyalty' : 'Membership'}
           </button>
         ))}
       </div>
 
-      {activeTab === "loyalty" && (
-        <div>
-          <div className="flex justify-between mb-4">
-            <h2 className="text-xl font-bold text-[#004AAD]">Loyalty Management</h2>
-            <button
-              onClick={() => {
-                setShowLoyaltyForm(!showLoyaltyForm);
-                resetLoyaltyForm();
-              }}
-              className="flex items-center gap-2 px-4 py-2 bg-[#004AAD] text-white rounded hover:bg-blue-700"
-            >
-              <Plus size={18} />
-              {showLoyaltyForm ? "Tutup" : "Tambah Loyalty"}
-            </button>
-          </div>
-
-          {showLoyaltyForm && (
-            <div className="bg-white p-4 rounded-xl shadow mb-6 grid grid-cols-2 gap-4">
-              <input placeholder="Nama Pelanggan" value={loyaltyForm.namapelanggan} onChange={(e) => setLoyaltyForm({ ...loyaltyForm, namapelanggan: e.target.value })} className="border p-2 rounded" />
-              <select value={loyaltyForm.levelmember} onChange={(e) => setLoyaltyForm({ ...loyaltyForm, levelmember: e.target.value })} className="border p-2 rounded">
-                <option>Basic</option>
-                <option>Reguler</option>
-                <option>Royal</option>
-              </select>
-              <input placeholder="Jumlah Point" value={loyaltyForm.jumlahpoint} onChange={(e) => setLoyaltyForm({ ...loyaltyForm, jumlahpoint: e.target.value })} className="border p-2 rounded" />
-              <input placeholder="Voucher" value={loyaltyForm.voucer} onChange={(e) => setLoyaltyForm({ ...loyaltyForm, voucer: e.target.value })} className="border p-2 rounded" />
-              <input placeholder="Riwayat Tukar" value={loyaltyForm.riwayattukar} onChange={(e) => setLoyaltyForm({ ...loyaltyForm, riwayattukar: e.target.value })} className="border p-2 rounded col-span-2" />
-              <button onClick={saveLoyalty} className="col-span-2 bg-green-600 text-white rounded py-2 hover:bg-green-700">💾 Simpan</button>
-            </div>
-          )}
-
-          <table className="min-w-full table-auto text-sm bg-white shadow rounded-xl">
-            <thead className="bg-gray-100 text-gray-700">
-              <tr>
-                <th className="px-4 py-3">ID</th>
-                <th className="px-4 py-3">Nama Pelanggan</th>
-                <th className="px-4 py-3">Level Member</th>
-                <th className="px-4 py-3">Jumlah Point</th>
-                <th className="px-4 py-3">Voucher</th>
-                <th className="px-4 py-3">Riwayat Tukar</th>
-                <th className="px-4 py-3 text-right">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loyalties.map((l, idx) => (
-                <tr key={l.id} className="border-t hover:bg-gray-50">
-                  <td className="px-4 py-2">#CS{String(idx + 1).padStart(3, "0")}</td>
-                  <td className="px-4 py-2 text-blue-700 font-medium">{l.namapelanggan}</td>
-                  <td className="px-4 py-2">{l.levelmember}</td>
-                  <td className="px-4 py-2">{l.jumlahpoint}</td>
-                  <td className="px-4 py-2">{l.voucer || "0 Voucher"}</td>
-                  <td className="px-4 py-2">{l.riwayattukar || "Belum Ada"}</td>
-                  <td className="px-4 py-2 text-right space-x-2">
-                    <button onClick={() => { setLoyaltyForm(l); setShowLoyaltyForm(true); }} className="text-green-600"><Pencil size={16} /></button>
-                    <button onClick={() => deleteLoyalty(l.id)} className="text-red-600"><Trash2 size={16} /></button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="bg-white rounded-xl p-6 shadow">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-base font-semibold">
+            {activeTab === 'loyalty' ? 'Loyalty Management' : 'Membership Management'}
+          </h2>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-blue-600 text-white px-4 py-2 rounded-full shadow hover:bg-blue-700"
+          >
+            + Tambah {activeTab === 'loyalty' ? 'Loyalty' : 'Member'}
+          </button>
         </div>
-      )}
 
-      {activeTab === "membership" && (
-        <div>
-          <div className="flex justify-between mb-4">
-            <h2 className="text-xl font-bold text-[#004AAD]">Membership</h2>
-            <button
-              onClick={() => {
-                setShowMemberForm(!showMemberForm);
-                resetMemberForm();
-              }}
-              className="flex items-center gap-2 px-4 py-2 bg-[#004AAD] text-white rounded hover:bg-blue-700"
-            >
-              <Plus size={18} />
-              {showMemberForm ? "Tutup" : "Tambah Member"}
-            </button>
-          </div>
-
-          {showMemberForm && (
-            <div className="bg-white p-4 rounded-xl shadow mb-6 grid grid-cols-2 gap-4">
-              <input placeholder="Nama Pelanggan" value={memberForm.namapelanggan} onChange={(e) => setMemberForm({ ...memberForm, namapelanggan: e.target.value })} className="border p-2 rounded" />
-              <input placeholder="Email" value={memberForm.email} onChange={(e) => setMemberForm({ ...memberForm, email: e.target.value })} className="border p-2 rounded" />
-              <input placeholder="No. HP" value={memberForm.nohp} onChange={(e) => setMemberForm({ ...memberForm, nohp: e.target.value })} className="border p-2 rounded" />
-              <select value={memberForm.member} onChange={(e) => setMemberForm({ ...memberForm, member: e.target.value })} className="border p-2 rounded">
-                <option>Reguler</option>
-                <option>Loyal</option>
-                <option>VIP</option>
-              </select>
-              <input placeholder="Harga" value={memberForm.harga} onChange={(e) => setMemberForm({ ...memberForm, harga: e.target.value })} className="border p-2 rounded" />
-              <select value={memberForm.status} onChange={(e) => setMemberForm({ ...memberForm, status: e.target.value })} className="border p-2 rounded">
-                <option>Diproses</option>
-                <option>Paid</option>
-              </select>
-              <input type="date" value={memberForm.tanggalDaftar} onChange={(e) => setMemberForm({ ...memberForm, tanggalDaftar: e.target.value })} className="border p-2 rounded" />
-              <input type="date" value={memberForm.masaBerlaku} onChange={(e) => setMemberForm({ ...memberForm, masaBerlaku: e.target.value })} className="border p-2 rounded" />
-              <button onClick={saveMember} className="col-span-2 bg-green-600 text-white rounded py-2 hover:bg-green-700">💾 Simpan</button>
-            </div>
-          )}
-
-          <table className="min-w-full table-auto text-sm bg-white shadow rounded-xl">
-            <thead className="bg-gray-100 text-gray-700">
-              <tr>
-                <th className="px-4 py-3">Nama</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">No HP</th>
-                <th className="px-4 py-3">Member</th>
-                <th className="px-4 py-3">Harga</th>
-                <th className="px-4 py-3">Status</th>
-                <th className="px-4 py-3">Tgl Daftar</th>
-                <th className="px-4 py-3">Masa Berlaku</th>
-                <th className="px-4 py-3 text-right">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {members.map((m) => (
-                <tr key={m.id} className="border-t hover:bg-gray-50">
-                  <td className="px-4 py-2">{m.namapelanggan}</td>
-                  <td className="px-4 py-2">{m.email}</td>
-                  <td className="px-4 py-2">{m.nohp}</td>
-                  <td className="px-4 py-2">{m.member}</td>
-                  <td className="px-4 py-2">Rp. {Number(m.harga || 0).toLocaleString()}</td>
-                  <td className={`px-4 py-2 ${m.status === "Paid" ? "text-green-600" : "text-red-500"}`}>{m.status}</td>
-                  <td className="px-4 py-2">{m.tanggalDaftar}</td>
-                  <td className="px-4 py-2">{m.masaBerlaku}</td>
-                  <td className="px-4 py-2 text-right space-x-2">
-                    <button onClick={() => { setMemberForm(m); setShowMemberForm(true); }} className="text-indigo-600"><Pencil size={16} /></button>
-                    <button onClick={() => deleteMember(m.id)} className="text-red-600"><Trash2 size={16} /></button>
-                  </td>
+        <div className="overflow-x-auto">
+          {activeTab === 'loyalty' ? (
+            <table className="min-w-full bg-white text-sm rounded-xl">
+              <thead>
+                <tr className="text-left bg-gray-100 text-gray-700">
+                  <th className="py-2 px-4">ID</th>
+                  <th className="py-2 px-4">Nama</th>
+                  <th className="py-2 px-4">Level</th>
+                  <th className="py-2 px-4">Point</th>
+                  <th className="py-2 px-4">Voucher</th>
+                  <th className="py-2 px-4">Riwayat</th>
+                  <th className="py-2 px-4 text-right">Aksi</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {loyalties.map((l) => (
+                  <tr key={l.id} className="border-t hover:bg-gray-50">
+                    <td className="px-4 py-2 font-semibold">#{l.id}</td>
+                    <td className="px-4 py-2">{l.namapelanggan}</td>
+                    <td className="px-4 py-2">
+                      <span className={`px-3 py-1 text-xs rounded-full font-semibold ${getStatusClass(l.levelmember)}`}>{l.levelmember}</span>
+                    </td>
+                    <td className="px-4 py-2">{l.jumlahpoint}</td>
+                    <td className="px-4 py-2">{l.voucer || "-"}</td>
+                    <td className="px-4 py-2">{l.riwayattukar || "-"}</td>
+                    <td className="px-4 py-2 text-right space-x-2">
+                      <button onClick={() => handleEdit(l)} className="text-indigo-600">Edit</button>
+                      <button onClick={() => handleDelete(l.id)} className="text-red-600">Hapus</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <table className="min-w-full bg-white text-sm rounded-xl">
+              <thead>
+                <tr className="text-left bg-gray-100 text-gray-700">
+                  <th className="py-2 px-4">Nama</th>
+                  <th className="py-2 px-4">Email</th>
+                  <th className="py-2 px-4">No HP</th>
+                  <th className="py-2 px-4">Member</th>
+                  <th className="py-2 px-4">Harga</th>
+                  <th className="py-2 px-4">Status</th>
+                  <th className="py-2 px-4">Tgl Daftar</th>
+                  <th className="py-2 px-4">Masa Berlaku</th>
+                  <th className="py-2 px-4 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {members.map((m) => (
+                  <tr key={m.id} className="border-t hover:bg-gray-50">
+                    <td className="px-4 py-2">{m.namapelanggan}</td>
+                    <td className="px-4 py-2">{m.email}</td>
+                    <td className="px-4 py-2">{m.nohp}</td>
+                    <td className="px-4 py-2">{m.member}</td>
+                    <td className="px-4 py-2">Rp. {Number(m.harga || 0).toLocaleString()}</td>
+                    <td className="px-4 py-2 text-sm font-semibold {m.status === 'Paid' ? 'text-green-600' : 'text-red-600'}">{m.status}</td>
+                    <td className="px-4 py-2">{m.tanggalDaftar}</td>
+                    <td className="px-4 py-2">{m.masaBerlaku}</td>
+                    <td className="px-4 py-2 text-right space-x-2">
+                      <button onClick={() => handleEdit(m)} className="text-indigo-600">Edit</button>
+                      <button onClick={() => handleDelete(m.id)} className="text-red-600">Hapus</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+
+      {showForm && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl w-full max-w-lg shadow-xl">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold">
+                {activeTab === 'loyalty'
+                  ? editingLoyalty ? 'Edit Loyalty' : 'Tambah Loyalty'
+                  : editingMember ? 'Edit Member' : 'Tambah Member'}
+              </h3>
+              <button onClick={handleCloseForm} className="text-2xl text-gray-400 hover:text-red-600">&times;</button>
+            </div>
+            <form onSubmit={handleSubmitForm} className="grid gap-4">
+              {activeTab === 'loyalty' ? (
+                <>
+                  <input name="namapelanggan" placeholder="Nama Pelanggan" value={loyaltyForm.namapelanggan} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required />
+                  <select name="levelmember" value={loyaltyForm.levelmember} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required>
+                    <option>Basic</option>
+                    <option>Reguler</option>
+                    <option>Royal</option>
+                  </select>
+                  <input name="jumlahpoint" placeholder="Jumlah Point" value={loyaltyForm.jumlahpoint} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required />
+                  <input name="voucer" placeholder="Voucher" value={loyaltyForm.voucer} onChange={handleFormChange} className="border rounded-lg px-4 py-2" />
+                  <textarea name="riwayattukar" rows="3" placeholder="Riwayat Tukar" value={loyaltyForm.riwayattukar} onChange={handleFormChange} className="border rounded-lg px-4 py-2" />
+                </>
+              ) : (
+                <>
+                  <input name="namapelanggan" placeholder="Nama Pelanggan" value={memberForm.namapelanggan} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required />
+                  <input name="email" placeholder="Email" value={memberForm.email} onChange={handleFormChange} className="border rounded-lg px-4 py-2" />
+                  <input name="nohp" placeholder="No HP" value={memberForm.nohp} onChange={handleFormChange} className="border rounded-lg px-4 py-2" />
+                  <select name="member" value={memberForm.member} onChange={handleFormChange} className="border rounded-lg px-4 py-2">
+                    <option>Reguler</option>
+                    <option>Loyal</option>
+                    <option>VIP</option>
+                  </select>
+                  <input name="harga" placeholder="Harga" value={memberForm.harga} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required />
+                  <select name="status" value={memberForm.status} onChange={handleFormChange} className="border rounded-lg px-4 py-2">
+                    <option>Diproses</option>
+                    <option>Paid</option>
+                  </select>
+                  <input type="date" name="tanggalDaftar" value={memberForm.tanggalDaftar} onChange={handleFormChange} className="border rounded-lg px-4 py-2" required />
+                  <input type="date" name="masaBerlaku" value={memberForm.masaBerlaku} onChange={handleFormChange} className="border rounded-lg px-4 py-2" />
+                </>
+              )}
+
+              <div className="flex justify-between mt-2">
+                {(editingLoyalty || editingMember) && (
+                  <button type="button" onClick={() => handleDelete(activeTab === 'loyalty' ? editingLoyalty.id : editingMember.id)} className="text-red-600 hover:text-red-800">Hapus</button>
+                )}
+                <div className="flex gap-3 ml-auto">
+                  <button type="button" onClick={handleCloseForm} className="border px-4 py-2 rounded text-gray-600 hover:bg-gray-100">Batal</button>
+                  <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    {editingLoyalty || editingMember ? 'Simpan Perubahan' : 'Simpan'}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
