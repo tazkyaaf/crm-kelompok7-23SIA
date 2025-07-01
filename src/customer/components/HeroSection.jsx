@@ -16,7 +16,6 @@ const HeroSection = ({ onSeeAll }) => (
       </button>
     </div>
 
-
     {/* Kanan - Mesin Cuci dan elemen visual */}
     <div className="md:w-1/2 w-full relative flex justify-center items-center z-10 md:pl-16">
       {/* Lingkaran biru di belakang mesin */}

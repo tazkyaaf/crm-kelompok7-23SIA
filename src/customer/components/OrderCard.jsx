@@ -13,7 +13,6 @@ import {
   FaClock
 } from "react-icons/fa";
 
-
 const OrderCard = ({ order, onClick }) => {
   const getStatusColor = (status) => {
     switch (status) {

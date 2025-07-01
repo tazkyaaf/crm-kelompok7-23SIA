@@ -10,7 +10,6 @@ const OrderStatusModal = ({ isOpen, onClose, order }) => {
       minute: "2-digit",
     });
 
-    
   const formatCurrency = (amount) =>
     new Intl.NumberFormat("id-ID", {
       style: "currency",

@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 
-
 export default function FAQSection() {
   const faqCategories = [
     {

@@ -12,7 +12,6 @@ const Header = ({ user, onLogout, onLogin }) => {
           Promo hanya untuk member. <Link to="/membership" className="underline">Gabung sekarang</Link>
         </div>
       )}
-
       <header className="w-full bg-white shadow-md px-6 md:px-16 py-4 flex items-center justify-between fixed top-0 z-50">
         {/* Logo */}
         <div

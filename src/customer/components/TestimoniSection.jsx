@@ -24,7 +24,6 @@ const testimonials = [
   }
 ];
 
-
 const TestimonialSection = () => (
   <section className="bg-[#eaf4fc] py-20 text-center">
     <h4 className="text-[#92bedc] font-medium text-base mb-1">CUSTOMER TESTIMONIAL</h4>

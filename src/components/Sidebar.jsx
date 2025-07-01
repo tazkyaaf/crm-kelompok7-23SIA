@@ -7,8 +7,6 @@ import {
   UserPlus,
   Share2,
   Gift,
-  LogIn,
-  UserPlus,
   LogOut
 } from 'lucide-react';
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
@@ -16,7 +14,7 @@ import { Link, useLocation } from 'react-router-dom';
 import htmLogo from '../assets/logo1.png'; // Sesuaikan path logomu
 
 const menuItems = [
-  { name: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/' },
+  { name: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/admin/dashboard' },
   { name: 'Invoicing', icon: <ShoppingCart size={18} />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings size={18} />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users size={18} />, path: '/workflow' },
@@ -28,7 +26,7 @@ const menuItems = [
 ];
 
 const accountItems = [
-  { name: 'Sign In', icon: <LogIn size={18} />, path: '/signin' },
+  { name: 'Sign In', icon: <LogIn size={18} />, path: '/signin/admin' },
   { name: 'Sign Up', icon: <UserPlus size={18} />, path: '/signup' },
   { name: 'Logout', icon: <LogOut size={18} />, action: 'logout' },
 ];
@@ -71,8 +69,8 @@ const Sidebar = () => {
               <button
                 key={item.name}
                 onClick={() => {
-                  localStorage.removeItem('userToken'); // Atur sesuai token kamu
-                  window.location.href = '/home'; // Arahkan ke halaman customer
+                  localStorage.removeItem('userToken'); // Atur sesuai nama token
+                  window.location.href = '/home';
                 }}
                 className="flex items-center w-full gap-3 px-3 py-2 rounded-md transition font-medium text-sm text-gray-400 hover:text-blue-600 hover:bg-blue-50"
               >

@@ -14,7 +14,6 @@ import MembershipCard from "../components/MembershipCard";
 const Service = () => {
   const [showMembershipRegistration, setShowMembershipRegistration] = useState(false);
   const [selectedMembership, setSelectedMembership] = useState(null);
-
   const services = [
     {
       title: "Express",

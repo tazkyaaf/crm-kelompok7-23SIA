@@ -4,6 +4,7 @@ import MembershipCard from "../components/MembershipCard";
 import { ArrowLeft } from "lucide-react";
 import { FaUser, FaCrown, FaStar, FaShippingFast, FaTshirt, FaFire, FaCheck } from "react-icons/fa";
 
+
 export default function Membership() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();

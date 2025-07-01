@@ -10,7 +10,6 @@ import {
   FiBell
 } from "react-icons/fi";
 
-
 const OrderSearchSection = () => {
   const [searchData, setSearchData] = useState({
     orderId: "",

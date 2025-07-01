@@ -8,7 +8,6 @@ const SignIn = () => {
   const [activeTab, setActiveTab] = useState('login');
   const [showRoleModal, setShowRoleModal] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
-
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [signupData, setSignupData] = useState({
     fullName: '',
