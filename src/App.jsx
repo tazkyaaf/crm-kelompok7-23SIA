@@ -1,11 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-<<<<<<< HEAD
 
 // Layout
-=======
 // Layouts
->>>>>>> 1197fecd1f92db6634111369c460dda203ce66ba
 import MainLayout from "./components/MainLayout";
 import AdminRoute from "./components/AdminRoute";
 import CustomerLayout from "./components/CustomerLayout";
