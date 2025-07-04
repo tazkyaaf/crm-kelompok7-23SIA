@@ -33,7 +33,7 @@ export default function FAQSection() {
     {
       icon: FaMapMarkerAlt,
       title: "Pickup & Delivery",
-      iconBg: "#10b981", // Green
+      iconBg: "#3b82f6", // Green
       faqs: [
         {
           question: "Daerah mana saja yang dilayani pickup?",
@@ -52,7 +52,7 @@ export default function FAQSection() {
     {
       icon: FaCreditCard,
       title: "Pembayaran",
-      iconBg: "#8b5cf6", // Purple
+      iconBg: "#3b82f6", // Purple
       faqs: [
         {
           question: "Metode pembayaran apa saja yang tersedia?",
@@ -71,7 +71,7 @@ export default function FAQSection() {
     {
       icon: FaClock,
       title: "Jam Operasional",
-      iconBg: "#f59e0b", // Orange
+      iconBg: "#3b82f6", // Orange
       faqs: [
         {
           question: "Jam berapa saja layanan pickup tersedia?",
@@ -239,7 +239,7 @@ export default function FAQSection() {
         </div>
 
        {/* Contact CTA with icons */}
-<div style={{ textAlign: "center", marginTop: "4rem" }}>
+{/* <div style={{ textAlign: "center", marginTop: "4rem" }}>
   <div style={{ 
     background: "linear-gradient(to right, #3b82f6, #10b981)",
     borderRadius: "1rem",
@@ -322,7 +322,7 @@ export default function FAQSection() {
       </button>
     </div>
   </div>
-</div>
+</div> */}
 
       </div>
     </section>

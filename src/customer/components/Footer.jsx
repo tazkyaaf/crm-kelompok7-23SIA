@@ -1,127 +1,126 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FaBox, FaPhone, FaEnvelope, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { HiOutlineLocationMarker, HiOutlineClock } from "react-icons/hi";
+
+import htmLogo from '../../assets/lgputih.png'; // ← sesuaikan jika kamu simpan di src/assets
 
 export default function Footer() {
-  const footerLinks = {
-    aboutUs: ["About us", "Our story", "Careers", "Philosophy", "Contact us"],
-    company: ["Our team", "Press", "Terms", "How it works", "Blog"],
-    services: ["Pickup", "Wash & Dry", "Delivery", "Laundry"],
-    checkIn: ["Drop off", "Status"],
-  };
+  const currentYear = new Date().getFullYear();
 
 
   return (
-    <footer className="bg-gradient-to-r from-blue-400 to-blue-500 py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-          {/* Logo and Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <div className="w-6 h-6 bg-blue-500 rounded-sm"></div>
-              </div>
-              <span className="text-xl font-bold text-white">HTM LAUNDRY</span>
+    <footer className="bg-gradient-to-r from-blue-800 to-blue-900 text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                            <img
+                              src={htmLogo}
+                              alt="HTM Laundry Logo"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+              <span className="text-xl font-bold">HTM LAUNDRY</span>
             </div>
-            <p className="text-blue-100 text-sm leading-relaxed mb-6">
-              Professional laundry service with pickup and delivery. Fresh,
-              clean clothes every time with premium care and convenience.
+            <p className="text-blue-100 text-sm leading-relaxed">
+              Solusi laundry terpercaya di Pekanbaru sejak 2019. Layanan antar-jemput, cepat, dan berkualitas.
             </p>
-            {/* Social Media */}
             <div className="flex space-x-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer">
-                <Facebook className="w-4 h-4 text-white" />
-              </div>
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer">
-                <Instagram className="w-4 h-4 text-white" />
-              </div>
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer">
-                <Twitter className="w-4 h-4 text-white" />
-              </div>
+              <a href="#" className="text-blue-200 hover:text-white transition-colors">
+                <FaFacebook className="text-lg" />
+              </a>
+              <a href="#" className="text-blue-200 hover:text-white transition-colors">
+                <FaInstagram className="text-lg" />
+              </a>
+              <a href="#" className="text-blue-200 hover:text-white transition-colors">
+                <FaTwitter className="text-lg" />
+              </a>
             </div>
-          </div>
-
-          {/* About Us */}
-          <div>
-            <h4 className="font-bold text-white mb-4">About us</h4>
-            <ul className="space-y-2">
-              {footerLinks.aboutUs.map((link) => (
-                <li key={link}>
-                  <button className="text-blue-100 hover:text-white text-sm transition-colors">
-                    {link}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-bold text-white mb-4">Company</h4>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link}>
-                  <button className="text-blue-100 hover:text-white text-sm transition-colors">
-                    {link}
-                  </button>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Services */}
-          <div>
-            <h4 className="font-bold text-white mb-4">Services</h4>
+          <div className="space-y-4">
+            <h4 className="font-semibold text-lg">Layanan Kami</h4>
             <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
-                <li key={link}>
-                  <button className="text-blue-100 hover:text-white text-sm transition-colors">
-                    {link}
-                  </button>
+              {['Regular Laundry', 'Express Laundry', 'Dry Cleaning', 'Cuci Sepatu', 'Cuci Karpet'].map((service) => (
+                <li key={service}>
+                  <Link 
+                    to="/service" 
+                    className="text-blue-100 hover:text-white transition-colors text-sm"
+                  >
+                    {service}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-
-          {/* Check in visit */}
-          <div>
-            <h4 className="font-bold text-white mb-4">Check in visit</h4>
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h4 className="font-semibold text-lg">Quick Links</h4>
             <ul className="space-y-2">
-              {footerLinks.checkIn.map((link) => (
-                <li key={link}>
-                  <button className="text-blue-100 hover:text-white text-sm transition-colors">
-                    {link}
-                  </button>
+              {[
+                { name: 'Beranda', path: '/' },
+                { name: 'Track Pesanan', path: '/orders' },
+                { name: 'Membership', path: '/membership' },
+                { name: 'Contact Us', path: '/contact' },
+                { name: 'FAQ', path: '/faq' }
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    to={link.path} 
+                    className="text-blue-100 hover:text-white transition-colors text-sm"
+                  >
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
-            {/* Social Media Icons */}
-            <div className="flex space-x-2 mt-6">
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">f</span>
+          </div>
+
+          {/* Contact Info */}
+          <div className="space-y-4">
+            <h4 className="font-semibold text-lg">Hubungi Kami</h4>
+            <div className="space-y-3 text-blue-100 text-sm">
+              <div className="flex items-start space-x-3">
+                <HiOutlineLocationMarker className="text-blue-400 text-lg mt-0.5" />
+                <span>Jl. Sudirman No. 123, Pekanbaru, Riau</span>
               </div>
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">ig</span>
+              <div className="flex items-center space-x-3">
+                <FaPhone className="text-blue-400 text-base" />
+                <span>+62 761-123-456</span>
               </div>
-              <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">in</span>
+              <div className="flex items-center space-x-3">
+                <FaEnvelope className="text-blue-400 text-base" />
+                <span>info@htmlaundry.com</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <HiOutlineClock className="text-blue-400 text-lg mt-0.5" />
+                <div className="space-y-1">
+                  <div>Sen - Jum: 08.00 - 20.00</div>
+                  <div>Sabtu: 08.00 - 18.00</div>
+                  <div>Minggu: 09.00 - 17.00</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Border */}
-        <div className="border-t border-blue-300 mt-12 pt-8">
+        {/* Bottom Line */}
+        <div className="border-t border-blue-700 mt-12 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-blue-100 text-sm">
-              © 2024 HTM Laundry. All rights reserved.
+            <p className="text-blue-200 text-sm">
+              © {currentYear} HTM Laundry. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <button className="text-blue-100 hover:text-white text-sm transition-colors">
+              <Link to="/privacy" className="text-blue-200 hover:text-white text-sm">
                 Privacy Policy
-              </button>
-              <button className="text-blue-100 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link to="/terms" className="text-blue-200 hover:text-white text-sm">
                 Terms of Service
-              </button>
+              </Link>
             </div>
           </div>
         </div>

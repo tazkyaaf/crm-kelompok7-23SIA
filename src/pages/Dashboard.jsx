@@ -45,13 +45,13 @@ const Dashboard = () => {
     datasets: [
       {
         label: "Deposit",
-        backgroundColor: "#3b82f6", // biru
+        backgroundColor: "#3b82f6",
         borderRadius: 6,
         data: [300, 250, 280, 310, 150, 290, 310],
       },
       {
         label: "Withdraw",
-        backgroundColor: "#ec4899", // pink
+        backgroundColor: "#ec4899",
         borderRadius: 6,
         data: [450, 350, 340, 470, 190, 400, 390],
       },
@@ -62,30 +62,26 @@ const Dashboard = () => {
     {
       name: "Express",
       date: "25 Jan 2021",
-      icon: <Truck className="text-blue-500" />,
+      icon: <Truck className="text-indigo-600" />,
       value: 470,
-      color: "bg-indigo-600",
     },
     {
       name: "Reguler",
       date: "25 Jan 2021",
       icon: <Shirt className="text-orange-400" />,
       value: 290,
-      color: "bg-orange-400",
     },
     {
       name: "Cuci Lipat",
       date: "25 Jan 2021",
-      icon: <WashingMachine className="text-blue-500" />,
+      icon: <WashingMachine className="text-indigo-600" />,
       value: 210,
-      color: "bg-indigo-600",
     },
     {
       name: "Strika Saja",
       date: "25 Jan 2021",
       icon: <Scissors className="text-orange-400" />,
       value: 180,
-      color: "bg-orange-400",
     },
   ];
 
@@ -93,16 +89,14 @@ const Dashboard = () => {
     <div className="p-4 space-y-6">
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
 
-      {/* Card Section */}
+      {/* Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {cards.map((card, i) => (
           <div
             key={i}
             className="bg-white rounded-xl shadow p-4 flex flex-col items-center text-center"
           >
-            <div className="mb-2 p-3 rounded-full bg-indigo-100">
-              {card.icon}
-            </div>
+            <div className="mb-2 p-3 rounded-full bg-indigo-100">{card.icon}</div>
             <p className="text-sm text-gray-500">{card.title}</p>
             <h2 className="text-xl font-bold text-indigo-600">{card.value}</h2>
           </div>
@@ -130,7 +124,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Top Service */}
+      {/* Top Services */}
       <div>
         <h2 className="font-semibold text-xl mt-8 mb-2">Top Service</h2>
         <div className="bg-white rounded-xl shadow p-4 space-y-4">
@@ -142,7 +136,7 @@ const Dashboard = () => {
                 <p className="text-sm text-gray-500">{service.date}</p>
                 <div className="mt-1 w-full h-3 bg-gray-200 rounded-full">
                   <div
-                    className={`${service.color} h-3 rounded-full`}
+                    className="h-3 rounded-full bg-indigo-600"
                     style={{ width: `${(service.value / 500) * 100}%` }}
                   ></div>
                 </div>
