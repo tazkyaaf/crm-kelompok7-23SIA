@@ -51,6 +51,7 @@ const SocialMediaManagement = () => {
     }
   };
 
+  
   const handleSave = () => {
     const updated = { ...formData };
     if (!updated.id) {
@@ -73,6 +74,7 @@ const SocialMediaManagement = () => {
       type: 'like',
     });
   };
+
 
   return (
     <div className="p-6 max-w-5xl mx-auto">

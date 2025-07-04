@@ -27,7 +27,6 @@ const Header = () => {
     <header className="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-10">
       {/* Kiri: Logo + Judul */}
       <div className="flex items-center gap-4">
-        <img src={logo} alt="Logo" className="w-8 h-8" />
         <h1 className="text-lg font-semibold text-gray-800">{pageTitle}</h1>
       </div>
 
