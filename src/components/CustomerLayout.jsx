@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../customer/components/Header";
+import Footer from "../customer/components/Footer";
 
 const CustomerLayout = () => {
   const [user, setUser] = useState(null);
@@ -26,7 +26,7 @@ const CustomerLayout = () => {
   return (
     <>
       <Header user={user} onLogout={handleLogout} onLogin={handleLogin} />
-      <main className="pt-20">
+      <main>
         <Outlet />
       </main>
       <Footer />

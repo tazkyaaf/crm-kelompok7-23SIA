@@ -9,8 +9,11 @@ import {
   FiRefreshCw,
   FiBell
 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const OrderSearchSection = () => {
+  const navigate = useNavigate();
+
   const [searchData, setSearchData] = useState({
     orderId: "",
     phone: "",
@@ -28,7 +31,25 @@ const OrderSearchSection = () => {
 
   const handleQuickSearch = (e) => {
     e.preventDefault();
-    console.log("Quick search:", searchData);
+    let queryParam = "";
+
+    switch (activeTab) {
+      case "order-id":
+        queryParam = searchData.orderId;
+        break;
+      case "phone":
+        queryParam = searchData.phone;
+        break;
+      case "email":
+        queryParam = searchData.email;
+        break;
+      default:
+        break;
+    }
+
+    if (queryParam) {
+      navigate(`/order?q=${encodeURIComponent(queryParam)}`);
+    }
   };
 
   // Custom select component
@@ -243,8 +264,7 @@ const OrderSearchSection = () => {
                         5-10 menit)
                       </p>
                       <p>
-                        • Hubungi customer service kami di WhatsApp:{" "}
-                        <strong>0812-3456-7890</strong>
+                        • Hubungi customer service kami di WhatsApp: <strong>0812-3456-7890</strong>
                       </p>
                     </div>
                   </div>
@@ -281,6 +301,5 @@ const OrderSearchSection = () => {
     </section>
   );
 };
-
 
 export default OrderSearchSection;

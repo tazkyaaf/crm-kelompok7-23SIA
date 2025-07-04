@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import WhyUsSection from "../components/WhyUsSection";
 import ContactUsSection from "../components/ContactUsSection";
-import ModalLogin from "../components/ModalLogin";
+// import ModalLogin from "../components/ModalLogin";
 import TestimonialSection from "../components/TestimoniSection";
 import FAQSection from "../components/FAQSection";
 import MembershipCard from "../components/MembershipCard";
@@ -108,8 +108,8 @@ const Home = () => {
 <TestimonialSection/>
 <FAQSection/>
       <ContactUsSection />
-
-      {showLoginOptions && <ModalLogin onClose={() => setShowLoginOptions(false)} />}
+{/* 
+      {showLoginOptions && <ModalLogin onClose={() => setShowLoginOptions(false)} />} */}
     </div>
   );
 };
