@@ -12,10 +12,10 @@ import {
 
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-import htmLogo from '../assets/logo1.png'; // Sesuaikan path logomu
+import htmLogo from '../assets/lgbiru.png'; // Sesuaikan path logomu
 
 const menuItems = [
-  { name: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/' },
+  { name: 'Dashboard', icon: <LayoutDashboard size={18} />, path: '/admin/dashboard' },
   { name: 'Invoicing', icon: <ShoppingCart size={18} />, path: '/invoicing' },
   { name: 'Service Configuration', icon: <Settings size={18} />, path: '/serviceconfiguration' },
   { name: 'Workflow Development', icon: <Users size={18} />, path: '/workflow' },
@@ -24,13 +24,11 @@ const menuItems = [
   { name: 'Content Management', icon: <FaFileAlt size={16} />, path: '/content' },
   { name: 'Social Media Management', icon: <Share2 size={18} />, path: '/socialmediamanagement' },
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
-  { name: 'User', icon: <Gift size={18} />, path: '/user' },
+  { name: 'Admin Setting', icon: <Settings size={18} />, path: '/setting' },
 ];
 
 const accountItems = [
-  { name: 'Sign In', icon: <LogIn size={18} />, path: '/signin' },
-  { name: 'Sign Up', icon: <UserPlus size={18} />, path: '/signup' },
-  { name: 'Logout', icon: <LogOut size={18} />, action: 'logout' },
+  { name: 'Home', icon: <LogOut size={18} />, action: 'logout' },
 ];
 
 const Sidebar = () => {
@@ -41,7 +39,9 @@ const Sidebar = () => {
     <aside className="bg-white w-64 h-screen px-4 py-6 hidden md:flex flex-col shadow-sm">
       {/* Logo & Branding */}
       <div className="flex items-center justify-center mb-10">
-        <img src={htmLogo} alt="HTM Laundry" className="w-40 object-contain" />
+        <img src={htmLogo} alt="HTM Laundry" className="w-10 object-contain" />
+        <p className="font-bold text-blue-600">HTM LAUNDRY</p>
+
       </div>
 
       {/* Menu Utama */}

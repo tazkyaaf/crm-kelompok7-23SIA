@@ -1,8 +1,7 @@
 import React from "react";
-import { 
-  FaBox, 
+import {
+  FaBox,
   FaCalendarAlt,
-  FaChevronDown,
   FaCheckCircle,
   FaExclamationCircle,
   FaUser,
@@ -104,8 +103,6 @@ const OrderCard = ({ order, onClick }) => {
       year: "numeric",
       month: "short",
       day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
     });
   };
 
@@ -118,157 +115,64 @@ const OrderCard = ({ order, onClick }) => {
   };
 
   return (
-    <div className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white overflow-hidden rounded-lg">
-      <div className="p-6">
-        <div className="space-y-6">
+    <div className="max-w-5xl mx-auto border border-blue-200 rounded-2xl p-6 shadow-md bg-white">
+      <div className="flex flex-col md:flex-row justify-between gap-6">
+        {/* Left Content */}
+        <div className="flex-1 space-y-4">
           {/* Header */}
-          <div className="flex items-start justify-between">
-            <div className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <h3 className="text-xl font-bold text-gray-800">
-                  {order.id}
-                </h3>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(order.status)}`}>
-                  {getStatusText(order.status)}
-                </span>
-              </div>
-
-              <div className="flex items-center space-x-4 text-sm text-gray-500">
-                <div className="flex items-center space-x-1">
-                  <FaCalendarAlt className="text-gray-400" />
-                  <span>{formatDate(order.orderDate)}</span>
-                </div>
-                <div className="flex items-center space-x-1">
-                  {getMembershipIcon(order.membershipLevel)}
-                  <span className={`px-2 py-1 rounded-full text-xs ${getMembershipColor(order.membershipLevel)}`}>
-                    {order.membershipLevel.toUpperCase()}
-                  </span>
-                </div>
-              </div>
+          <div className="flex items-center gap-4">
+            <FaBox className="text-2xl text-blue-400" />
+            <div>
+              <h3 className="text-lg font-bold text-gray-800">{order.id}</h3>
+              <p className="text-sm text-gray-500">{order.serviceType}</p>
             </div>
-
-            <div className="text-right">
-              <div className="text-2xl font-bold text-blue-600 mb-1">
-                {formatCurrency(order.total)}
-              </div>
-              <span className={`px-2 py-1 rounded-full text-xs ${getPaymentStatusColor(order.paymentStatus)}`}>
-                <FaMoneyBillWave className="inline mr-1" />
-                {getPaymentStatusText(order.paymentStatus)}
-              </span>
-            </div>
+            <span className={`ml-auto px-3 py-1 rounded-full text-sm font-medium border ${getStatusColor(order.status)}`}>
+              {getStatusText(order.status)}
+            </span>
           </div>
 
-          {/* Customer Info */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-100 rounded-lg">
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-sm">
-                <FaUser className="text-gray-400" />
-                <span className="font-medium text-gray-800">
-                  {order.customerName}
-                </span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm">
-                <FaPhone className="text-gray-400" />
-                <span className="text-gray-500">{order.phone}</span>
-              </div>
+          {/* Items */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border border-blue-100 p-3 rounded-xl">
+              <h4 className="font-medium text-gray-700 mb-1 flex items-center gap-2">
+                <FaBox className="text-blue-400" /> Item Laundry:
+              </h4>
+              <ul className="text-gray-600 text-sm list-disc list-inside">
+                {order.items.map((item, idx) => (
+                  <li key={idx}>{item.type}</li>
+                ))}
+              </ul>
             </div>
-            <div className="space-y-2">
-              <div className="flex items-start space-x-2 text-sm">
-                <FaMapMarkerAlt className="mt-0.5 text-gray-400" />
-                <span className="text-gray-500 leading-relaxed">
-                  {order.address}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Items Summary */}
-          <div className="space-y-3">
-            <h4 className="font-semibold text-gray-800 flex items-center space-x-2">
-              <FaBox className="text-gray-400" />
-              <span>Detail Layanan</span>
-            </h4>
-            <div className="space-y-2">
-              {order.items.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center p-3 bg-white border border-gray-200 rounded-lg"
-                >
-                  <div>
-                    <span className="font-medium text-gray-800">
-                      {item.type}
-                    </span>
-                    <span className="text-gray-500 text-sm ml-2">
-                      ({item.quantity})
-                    </span>
-                  </div>
-                  <span className="font-semibold text-blue-600">
-                    {formatCurrency(item.price)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Timeline Summary */}
-          <div className="space-y-3">
-            <h4 className="font-semibold text-gray-800 flex items-center space-x-2">
-              <FaClock className="text-gray-400" />
-              <span>Timeline</span>
-            </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              {order.pickupDate && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Pickup:</span>
-                  <span className="font-medium text-gray-800">
-                    {formatDate(order.pickupDate)}
-                  </span>
-                </div>
-              )}
-              {order.estimatedPickup && !order.pickupDate && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Est. Pickup:</span>
-                  <span className="font-medium text-gray-800">
-                    {formatDate(order.estimatedPickup)}
-                  </span>
-                </div>
-              )}
-              {order.estimatedDelivery && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Est. Delivery:</span>
-                  <span className="font-medium text-gray-800">
-                    {formatDate(order.estimatedDelivery)}
-                  </span>
-                </div>
-              )}
-              {order.deliveryDate && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Delivered:</span>
-                  <span className="font-medium text-green-600">
-                    {formatDate(order.deliveryDate)}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Notes */}
-          {order.notes && (
-            <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
-                <strong>Catatan:</strong> {order.notes}
+            <div className="border border-blue-100 p-3 rounded-xl">
+              <h4 className="font-medium text-gray-700 mb-1 flex items-center gap-2">
+                <FaClock className="text-blue-400" /> Timeline:
+              </h4>
+              <p className="text-gray-600 text-sm">
+                Tanggal Order: <strong>{formatDate(order.orderDate)}</strong><br />
+                Estimasi Selesai: <strong>{formatDate(order.estimatedDelivery)}</strong>
               </p>
             </div>
-          )}
+          </div>
+        </div>
 
-          {/* Actions */}
-          <div className="flex justify-end pt-4 border-t border-gray-200">
+        {/* Right Content */}
+        <div className="w-full md:w-56 flex flex-col justify-between gap-4">
+          <div>
+            <div className="text-right text-xl font-bold text-gray-800">{formatCurrency(order.total)}</div>
+            <p className="text-right text-sm text-gray-500">Total Pembayaran</p>
+          </div>
+          <div className="flex flex-col gap-2">
             <button
               onClick={onClick}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md flex items-center"
+              className="w-full border border-gray-300 text-gray-700 hover:bg-gray-100 text-sm font-medium py-2 px-3 rounded-lg"
             >
-              <FaEye className="mr-2" />
               Lihat Detail
+            </button>
+            <button
+              disabled
+              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-500 bg-gray-50 text-sm font-medium py-2 px-3 rounded-lg cursor-not-allowed"
+            >
+              <FaPhone className="text-xs" /> Hubungi Kami
             </button>
           </div>
         </div>
@@ -276,6 +180,5 @@ const OrderCard = ({ order, onClick }) => {
     </div>
   );
 };
-
 
 export default OrderCard;

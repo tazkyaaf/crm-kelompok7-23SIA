@@ -1,6 +1,22 @@
-
+import React, { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import {
+  FaBox,
+  FaMoneyBillWave,
+  FaUser,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaClock,
+  FaMapPin,
+  FaFileInvoice,
+  FaDownload,
+  FaComments,
+  FaMinus,
+} from "react-icons/fa";
 
 const OrderStatusModal = ({ isOpen, onClose, order }) => {
+  if (!order) return null;
+
   const formatDate = (dateString) =>
     new Date(dateString).toLocaleDateString("id-ID", {
       year: "numeric",
@@ -17,7 +33,18 @@ const OrderStatusModal = ({ isOpen, onClose, order }) => {
       minimumFractionDigits: 0,
     }).format(amount);
 
-    
+  const getStatusProgress = () => {
+    const allStatuses = [
+      "pending_pickup",
+      "processing",
+      "ready_delivery",
+      "completed",
+      "delivered",
+    ];
+    const index = allStatuses.indexOf(order.status);
+    return ((index + 1) / allStatuses.length) * 100;
+  };
+
   const getMembershipIcon = (level) => {
     switch (level) {
       case "basic":
@@ -31,265 +58,192 @@ const OrderStatusModal = ({ isOpen, onClose, order }) => {
     }
   };
 
-  const getStatusProgress = () => {
-    const allStatuses = [
-      "ordered",
-      "picked_up",
-      "processing",
-      "completed",
-      "ready_delivery",
-      "delivered",
-    ];
-    const index = allStatuses.indexOf(order.status);
-    return ((index + 1) / allStatuses.length) * 100;
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-center text-2xl font-bold text-brand-dark">
-            Detail Pesanan {order.id}
-          </DialogTitle>
-        </DialogHeader>
+    <Transition appear show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-50" onClose={onClose}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black bg-opacity-50" />
+        </Transition.Child>
 
-        <div className="space-y-8">
-          {/* Order Info */}
-          <Card className="border-2 border-brand-light-blue bg-brand-light-blue/30">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center">
-                    <span className="text-white">📦</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-brand-dark">
-                      {order.id}
-                    </h3>
-                    <p className="text-brand-gray">
-                      Dipesan pada {formatDate(order.orderDate)}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-brand-blue mb-1">
-                    {formatCurrency(order.total)}
-                  </div>
-                  <Badge
-                    className={
-                      order.paymentStatus === "paid"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }
-                  >
-                    <span className="mr-1">💳</span>
-                    {order.paymentStatus === "paid" ? "Lunas" : "Menunggu"}
-                  </Badge>
-                </div>
-              </div>
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all space-y-8">
+                <h3 className="text-2xl font-bold text-center text-gray-800">
+                  Detail Pesanan {order.id}
+                </h3>
 
-              {/* Progress */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-brand-gray">Progress:</span>
-                  <span className="font-medium text-brand-dark">
-                    {Math.round(getStatusProgress())}%
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-brand-blue h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${getStatusProgress()}%` }}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Customer Info */}
-            <Card>
-              <CardContent className="p-6 space-y-4">
-                <h4 className="font-bold text-brand-dark flex items-center space-x-2">
-                  <span>👤</span>
-                  <span>Informasi Pelanggan</span>
-                </h4>
-
-                <div className="space-y-3">
-                  {[
-                    ["Nama", order.customerName],
-                    ["Telepon", order.phone],
-                    ["Email", order.email],
-                  ].map(([label, value]) => (
-                    <div
-                      key={label}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-brand-gray">{label}:</span>
-                      <span className="font-medium text-brand-dark">{value}</span>
-                    </div>
-                  ))}
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-brand-gray">Membership:</span>
-                    <div className="flex items-center space-x-2">
-                      {getMembershipIcon(order.membershipLevel)}
-                      <span className="font-medium text-brand-dark">
-                        {order.membershipLevel.toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t">
-                    <div className="flex items-start space-x-2">
-                      <span className="mt-1">📍</span>
-                      <div>
-                        <span className="text-brand-gray text-sm">Alamat:</span>
-                        <p className="font-medium text-brand-dark">{order.address}</p>
+                {/* Order Summary */}
+                <div className="border-2 border-blue-200 bg-blue-50/50 rounded-lg">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                          <FaBox className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-800">
+                            {order.id}
+                          </h3>
+                          <p className="text-gray-600">
+                            Dipesan pada {formatDate(order.orderDate)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Order Items */}
-            <Card>
-              <CardContent className="p-6 space-y-4">
-                <h4 className="font-bold text-brand-dark flex items-center space-x-2">
-                  <span>📦</span>
-                  <span>Detail Pesanan</span>
-                </h4>
-
-                <div className="space-y-3">
-                  {order.items.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center p-3 bg-brand-light-gray rounded-lg"
-                    >
-                      <div>
-                        <span className="font-medium text-brand-dark">{item.type}</span>
-                        <br />
-                        <span className="text-sm text-brand-gray">
-                          {item.quantity}
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-blue-600 mb-1">
+                          {formatCurrency(order.total)}
+                        </div>
+                        <span
+                          className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${
+                            order.paymentStatus === "paid"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-yellow-100 text-yellow-800"
+                          }`}
+                        >
+                          <FaMoneyBillWave className="w-4 h-4 mr-1" />
+                          {order.paymentStatus === "paid" ? "Lunas" : "Menunggu"}
                         </span>
                       </div>
-                      <span className="font-bold text-brand-blue">
-                        {formatCurrency(item.price)}
-                      </span>
                     </div>
-                  ))}
 
-                  <Separator />
-
-                  <div className="flex justify-between items-center text-lg font-bold">
-                    <span>Total:</span>
-                    <span className="text-brand-blue">
-                      {formatCurrency(order.total)}
-                    </span>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Progress:</span>
+                        <span className="font-medium text-gray-800">
+                          {Math.round(getStatusProgress())}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${getStatusProgress()}%` }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
+                {/* Informasi Pelanggan & Detail Pesanan */}
+                <div className="border border-gray-200 rounded-lg p-6 shadow-sm bg-white">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                        <FaUser /> Informasi Pelanggan
+                      </h4>
+                      <p><strong>Nama:</strong> {order.customerName}</p>
+                      <p><FaPhone className="inline mr-2" /> {order.phone}</p>
+                      <p><FaMapMarkerAlt className="inline mr-2" /> {order.address}</p>
+                      <p className="flex items-center gap-2">
+                        <span>Membership:</span>
+                        {getMembershipIcon(order.membershipLevel)}
+                        <span className="uppercase font-medium">
+                          {order.membershipLevel}
+                        </span>
+                      </p>
+                    </div>
+
+                    {/* Order Items */}
+                    <div className="space-y-3">
+                      <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                        <FaBox /> Detail Pesanan
+                      </h4>
+                      {order.items.map((item, i) => (
+                        <div
+                          key={i}
+                          className="flex justify-between items-center bg-gray-50 px-3 py-2 rounded border"
+                        >
+                          <span>{item.type} <span className="text-sm">({item.quantity})</span></span>
+                          <span className="font-medium text-blue-600">
+                            {formatCurrency(item.price)}
+                          </span>
+                        </div>
+                      ))}
+                      <div className="text-right font-bold text-blue-700 mt-2">
+                        Total: {formatCurrency(order.total)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Timeline */}
+                <div className="border border-gray-200 rounded-lg p-6 shadow-sm bg-white">
+                  <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2 mb-4">
+                    <FaClock /> Timeline
+                  </h4>
+                  <div className="space-y-4">
+                    {order.timeline?.map((item, index) => (
+                      <div key={index} className="border-l-4 border-blue-500 pl-4">
+                        <p className="font-semibold text-gray-800">
+                          {item.description}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          {formatDate(item.time)}
+                        </p>
+                        {item.location && (
+                          <p className="text-sm text-gray-500">
+                            <FaMapPin className="inline mr-1" /> {item.location}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Notes */}
                 {order.notes && (
-                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p className="text-sm text-blue-800">
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-blue-800 text-sm">
                       <strong>Catatan:</strong> {order.notes}
                     </p>
                   </div>
                 )}
-              </CardContent>
-            </Card>
-          </div>
 
-          {/* Timeline */}
-          <Card>
-            <CardContent className="p-6">
-              <h4 className="font-bold text-brand-dark flex items-center space-x-2 mb-6">
-                <span>⏱️</span>
-                <span>Timeline Pesanan</span>
-              </h4>
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button
+                    onClick={() => window.print()}
+                    className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded flex items-center gap-2"
+                  >
+                    <FaFileInvoice className="w-4 h-4" /> Cetak Invoice
+                  </button>
 
-              <div className="space-y-4">
-                {order.timeline.map((event, index) => {
-                  const isLast = index === order.timeline.length - 1;
-                  return (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-brand-blue text-white">
-                          <span>✓</span>
-                        </div>
-                        {!isLast && (
-                          <div className="w-0.5 h-8 mt-2 bg-brand-blue" />
-                        )}
-                      </div>
-                      <div className="flex-1 pb-4">
-                        <div className="flex items-center justify-between">
-                          <h5 className="font-semibold text-brand-dark">
-                            {event.description}
-                          </h5>
-                          <span className="text-sm text-brand-gray">
-                            {formatDate(event.time)}
-                          </span>
-                        </div>
-                        <p className="text-sm text-brand-gray mt-1">
-                          Status: {event.status}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+                  <button
+                    onClick={() => alert("Fitur download PDF akan segera tersedia")}
+                    className="border border-green-600 text-green-600 hover:bg-green-50 px-4 py-2 rounded flex items-center gap-2"
+                  >
+                    <FaDownload className="w-4 h-4" /> Download PDF
+                  </button>
 
-                {order.status !== "delivered" && (
-                  <div className="flex items-start space-x-4 opacity-50">
-                    <div className="flex flex-col items-center">
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-200 text-gray-600">
-                        <span>🚚</span>
-                      </div>
-                    </div>
-                    <div className="flex-1 pb-4">
-                      <h5 className="font-semibold text-gray-600">
-                        {order.status === "ready_delivery"
-                          ? "Sedang dalam perjalanan"
-                          : "Menunggu pengantaran"}
-                      </h5>
-                      {order.estimatedDelivery && (
-                        <p className="text-sm text-gray-500">
-                          Estimasi: {formatDate(order.estimatedDelivery)}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Actions */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              className="border-brand-blue text-brand-blue hover:bg-brand-light-blue"
-            >
-              <span className="mr-2">🖨️</span>
-              Cetak Invoice
-            </Button>
-
-            <Button
-              variant="outline"
-              className="border-brand-green text-brand-green hover:bg-brand-light-green"
-            >
-              <span className="mr-2">📥</span>
-              Download PDF
-            </Button>
-
-            <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white">
-              <span className="mr-2">💬</span>
-              Hubungi CS
-            </Button>
+                  <button
+                    onClick={() => window.open("tel:+6281234567890", "_self")}
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2"
+                  >
+                    <FaComments className="w-4 h-4" /> Hubungi CS
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </Dialog>
+    </Transition>
   );
 };
 

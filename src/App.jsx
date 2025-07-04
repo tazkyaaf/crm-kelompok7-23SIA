@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 // Layout
 import MainLayout from "./components/MainLayout";
 import AdminRoute from "./components/AdminRoute";
-import CustomerLayout from "./customer/components/CustomerLayout";
+import CustomerLayout from "./components/CustomerLayout";
 
 // Pages
 import Dashboard from "./pages/Dashboard";
@@ -15,15 +15,22 @@ import ContactManagement from "./pages/ContactManagement";
 import ContentManagement from "./pages/ContentManagement";
 import SocialMediaManagement from "./pages/SocialMediaManagement";
 import LoyaltyManagement from "./pages/LoyaltyManagement";
-import User from "./pages/User";
+
 
 // Customer Pages
 import Home from "./customer/pages/Home";
 import Service from "./customer/pages/Service";
 import Membership from "./customer/pages/Membership";
-import SignIn from "./pages/SignIn";
+// import SignIn from "./pages/SignIn";
 import Contact from "./customer/pages/Contact";
 import Order from "./customer/pages/Order";
+import NotFound from "./customer/pages/NotFound";
+import Login from "./customer/pages/Login";
+
+import ResetPassword from "./customer/pages/ResetPassword";
+import Register from "./customer/pages/register";
+import AdminSettings from "./pages/AdminSettings";
+
 
 
 
@@ -38,8 +45,11 @@ function App() {
         <Route path="/membership" element={<Membership />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/signin/admin" element={<SignIn role="admin" />} />
-        <Route path="/signin/customer" element={<SignIn role="customer" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        {/* <Route path="/signin/admin" element={<SignIn role="admin" />} />
+        <Route path="/signin/customer" element={<SignIn role="customer" />} /> */}
          <Route path="/" element={<Home />} />
       </Route>
 
@@ -48,6 +58,7 @@ function App() {
         <Route element={<MainLayout />}>
         
           <Route path="/admin/dashboard" element={<Dashboard />} />
+           <Route path="/setting" element={<AdminSettings />} />
           <Route path="/invoicing" element={<InvoicingPage />} />
           <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />
           <Route path="/workflow" element={<WorkflowDevelopment />} />
@@ -56,19 +67,19 @@ function App() {
           <Route path="/content" element={<ContentManagement />} />
           <Route path="/socialmediamanagement" element={<SocialMediaManagement />} />
           <Route path="/loyaltymanagement" element={<LoyaltyManagement />} />
-          <Route path="/user" element={<User />} />
+         
         </Route>
       </Route>
-
+<Route path="*" element={<NotFound />} />
       {/* Halaman Tidak Ditemukan */}
-      <Route
+      {/* <Route
         path="*"
         element={
           <div className="p-10 text-center text-red-600 text-xl">
             404 - Halaman tidak ditemukan
           </div>
         }
-      />
+      /> */}
     </Routes>
   );
 }
