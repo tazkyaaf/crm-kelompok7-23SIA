@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ThumbsUp, Eye, Pencil, Trash2, Plus } from 'lucide-react';
+import { ThumbsUp, Eye, Plus } from 'lucide-react';
 
 const LOCAL_STORAGE_KEY = 'social_media_posts';
 
@@ -75,68 +75,62 @@ const SocialMediaManagement = () => {
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xl font-bold text-gray-800">📱 Social Media Management</h1>
-        <button
-          onClick={handleAddClick}
-          className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          <Plus size={18} />
-          Tambah Postingan
-        </button>
-      </div>
+    <div className="min-h-screen bg-[#f6f8fc] p-6 text-[#2e3271]">
+      <h1 className="text-xl font-semibold mb-4">Social Media Management</h1>
 
-      {/* Header Table */}
-      <div className="grid grid-cols-6 gap-4 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 rounded-t">
-        <div>ID</div>
-        <div>Platform</div>
-        <div>Tanggal</div>
-        <div>Deskripsi</div>
-        <div>Engagement</div>
-        <div className="text-right">Aksi</div>
-      </div>
-
-      {/* Data List */}
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="grid grid-cols-6 gap-4 px-4 py-3 bg-white border-b items-center text-sm"
-        >
-          <div>{post.id}</div>
-          <div>{post.platform}</div>
-          <div>{post.date}</div>
-          <div className="truncate">{post.description}</div>
-          <div className="flex items-center gap-1">
-            {post.type === 'like' && <ThumbsUp className="w-4 h-4 text-blue-500" />}
-            {post.type === 'view' && <Eye className="w-4 h-4 text-green-500" />}
-            {post.engagement}
-          </div>
-          <div className="flex justify-end space-x-2">
-            <button onClick={() => handleEdit(post.id)} className="text-green-600 hover:underline">
-              Edit
-            </button>
-            <button onClick={() => handleDelete(post.id)} className="text-red-600 hover:underline">
-              Hapus
-            </button>
-          </div>
+      <div className="bg-white rounded-2xl p-6 shadow">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-base font-medium">Daftar Postingan</h2>
+          <button
+            onClick={handleAddClick}
+            className="bg-[#4c44c7] text-white px-4 py-2 rounded-full shadow flex items-center gap-2 hover:bg-[#3c38a5]"
+          >
+            <Plus size={18} />
+            Tambah Postingan
+          </button>
         </div>
-      ))}
 
-      {/* FORM MODAL */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm rounded-xl">
+            <thead>
+              <tr className="text-left bg-[#f3f6fb] text-[#5b5f73]">
+                <th className="py-2 px-4">ID</th>
+                <th className="py-2 px-4">Platform</th>
+                <th className="py-2 px-4">Tanggal</th>
+                <th className="py-2 px-4">Deskripsi</th>
+                <th className="py-2 px-4">Engagement</th>
+                <th className="py-2 px-4 text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody className="text-[#3e4161]">
+              {posts.map((post) => (
+                <tr key={post.id} className="border-t hover:bg-[#f9f9fc]">
+                  <td className="py-2 px-4 font-semibold">{post.id}</td>
+                  <td className="py-2 px-4">{post.platform}</td>
+                  <td className="py-2 px-4">{post.date}</td>
+                  <td className="py-2 px-4 truncate max-w-[200px]">{post.description}</td>
+                  <td className="py-2 px-4 flex items-center gap-1">
+                    {post.type === 'like' && <ThumbsUp className="w-4 h-4 text-blue-500" />}
+                    {post.type === 'view' && <Eye className="w-4 h-4 text-green-500" />}
+                    {post.engagement}
+                  </td>
+                  <td className="py-2 px-4 text-right">
+                    <button onClick={() => handleEdit(post.id)} className="text-green-600 hover:underline mr-2">Edit</button>
+                    <button onClick={() => handleDelete(post.id)} className="text-red-600 hover:underline">Hapus</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {formVisible && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl w-full max-w-lg shadow-xl">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">
-                {formData.id ? 'Edit Postingan' : 'Tambah Postingan'}
-              </h3>
-              <button
-                onClick={() => setFormVisible(false)}
-                className="text-2xl text-gray-400 hover:text-red-600"
-              >
-                &times;
-              </button>
+              <h3 className="text-lg font-semibold">{formData.id ? 'Edit Postingan' : 'Tambah Postingan'}</h3>
+              <button onClick={() => setFormVisible(false)} className="text-2xl text-gray-400 hover:text-red-600">&times;</button>
             </div>
             <form
               onSubmit={(e) => {
@@ -201,7 +195,7 @@ const SocialMediaManagement = () => {
                   </button>
                   <button
                     type="submit"
-                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                    className="bg-[#4c44c7] text-white px-4 py-2 rounded hover:bg-[#3a35a5]"
                   >
                     {formData.id ? 'Simpan Perubahan' : 'Simpan'}
                   </button>
