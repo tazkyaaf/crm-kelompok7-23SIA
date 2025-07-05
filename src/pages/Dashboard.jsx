@@ -12,7 +12,9 @@ import { Bar } from "react-chartjs-2";
 import { FaDollarSign, FaChartLine, FaStar, FaRocket } from "react-icons/fa";
 import { Truck, Shirt, Scissors, WashingMachine } from "lucide-react";
 
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 
 const Dashboard = () => {
   const cards = [
