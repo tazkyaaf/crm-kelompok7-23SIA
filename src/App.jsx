@@ -20,6 +20,7 @@ import Contact from "./customer/pages/Contact";
 import Login from "./customer/pages/Login";
 import ResetPassword from "./customer/pages/ResetPassword";
 import Register from "./customer/pages/register";
+import NotFound from "./customer/pages/NotFound";
 
 
 function App() {
