@@ -1,38 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-
-
-// Layout
-// Layouts
-import MainLayout from "./components/MainLayout";
-import AdminRoute from "./components/AdminRoute";
 import CustomerLayout from "./components/CustomerLayout";
-
-
-// Admin Pages
+import AdminRoute from "./components/AdminRoute";
+import MainLayout from "./components/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import AdminSettings from "./pages/AdminSettings";
+import InvoicingPage from "./pages/InvoicingPage";
+import ServiceConfigurationPage from "./pages/ServiceConfigurationPage";
+import WorkflowDevelopment from "./pages/WorkFlowDevelopment";
 import OrderManagementPage from "./pages/OrderManagementPage";
 import ContactManagement from "./pages/ContactManagement";
 import ContentManagement from "./pages/ContentManagement";
 import SocialMediaManagement from "./pages/SocialMediaManagement";
-import LoyaltyManagement from "./pages/LoyaltyManagement";
-// NOTE: Tambahkan jika file berikut tersedia
-import InvoicingPage from "./pages/InvoicingPage";
-import ServiceConfigurationPage from "./pages/ServiceConfigurationPage";
-import WorkflowDevelopment from "./pages/WorkflowDevelopment";
-
-// Customer Pages
+import LoyaltyTabs from "./pages/LoyaltyManagement";
 import Home from "./customer/pages/Home";
 import Service from "./customer/pages/Service";
 import Membership from "./customer/pages/Membership";
-import Contact from "./customer/pages/Contact";
 import Order from "./customer/pages/Order";
+import Contact from "./customer/pages/Contact";
 import Login from "./customer/pages/Login";
-
 import ResetPassword from "./customer/pages/ResetPassword";
-import NotFound from "./customer/pages/NotFound";
-import Register from "./customer/pages/register";
-
 
 function App() {
   return (
@@ -62,7 +48,7 @@ function App() {
           <Route path="/contactManagement" element={<ContactManagement />} />
           <Route path="/content" element={<ContentManagement />} />
           <Route path="/socialmediamanagement" element={<SocialMediaManagement />} />
-          <Route path="/loyaltymanagement" element={<LoyaltyManagement />} />
+          <Route path="/loyaltymanagement" element={<LoyaltyTabs />} />
         </Route>
       </Route>
 
