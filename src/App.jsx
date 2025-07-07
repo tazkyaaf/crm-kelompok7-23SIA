@@ -21,6 +21,7 @@ import Login from "./customer/pages/Login";
 import ResetPassword from "./customer/pages/ResetPassword";
 import Register from "./customer/pages/register";
 
+
 function App() {
   return (
     <Routes>
