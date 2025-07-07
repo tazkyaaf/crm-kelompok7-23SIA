@@ -33,6 +33,7 @@ import ResetPassword from "./customer/pages/ResetPassword";
 import NotFound from "./customer/pages/NotFound";
 import Register from "./customer/pages/register";
 
+
 function App() {
   return (
     <Routes>
