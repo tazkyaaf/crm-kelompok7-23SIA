@@ -30,6 +30,8 @@ import Login from "./customer/pages/Login";
 import ResetPassword from "./customer/pages/ResetPassword";
 import Register from "./customer/pages/register";
 import AdminSettings from "./pages/AdminSettings";
+import PredictForm from "./pages/PredictForm";
+// import AprioriRules from "./pages/AprioriRules";
 
 
 
@@ -58,6 +60,7 @@ function App() {
         <Route element={<MainLayout />}>
         
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/prediction" element={<PredictForm />} />
            <Route path="/setting" element={<AdminSettings />} />
           <Route path="/invoicing" element={<InvoicingPage />} />
           <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />

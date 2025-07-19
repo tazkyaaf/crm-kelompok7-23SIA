@@ -7,7 +7,8 @@ import {
   Gift,
   LogIn,
   UserPlus,
-  LogOut
+  LogOut,
+  Sparkle
 } from 'lucide-react';
 
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
@@ -25,6 +26,7 @@ const menuItems = [
   { name: 'Social Media Management', icon: <Share2 size={18} />, path: '/socialmediamanagement' },
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
   { name: 'Admin Setting', icon: <Settings size={18} />, path: '/setting' },
+   { name: 'Prediksi', icon: <Sparkle size={18} />, path: '/prediction' },
 ];
 
 const accountItems = [
