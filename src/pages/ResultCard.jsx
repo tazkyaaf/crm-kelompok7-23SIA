@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const ResultCard = ({ hasil }) => {
   return (
     <div className="mt-6 p-4 bg-green-100 rounded shadow">

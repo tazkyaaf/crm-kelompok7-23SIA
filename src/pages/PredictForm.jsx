@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const PredictForm = () => {
   const [berat, setBerat] = useState("");
   const [jenisPewangi, setJenisPewangi] = useState("Ocean Fresh");

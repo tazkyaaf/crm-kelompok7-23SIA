@@ -29,6 +29,7 @@ const menuItems = [
    { name: 'Prediksi', icon: <Sparkle size={18} />, path: '/prediction' },
 ];
 
+
 const accountItems = [
   { name: 'Home', icon: <LogOut size={18} />, action: 'logout' },
 ];
