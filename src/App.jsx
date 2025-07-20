@@ -19,15 +19,20 @@ import Order from "./customer/pages/Order";
 import Contact from "./customer/pages/Contact";
 import Login from "./customer/pages/Login";
 import ResetPassword from "./customer/pages/ResetPassword";
+import Register from "./customer/pages/register";
+import AdminSettings from "./pages/AdminSettings";
+import PredictForm from "./pages/PredictForm";
+// import AprioriRules from "./pages/AprioriRules";
 
 import NotFound from "./customer/pages/NotFound";
-import Register from "./customer/pages/Register";
+// import Register from "./customer/pages/Register";
 
 
 
 function App() {
   return (
     <Routes>
+    
       {/* Halaman Customer */}
       <Route element={<CustomerLayout />}>
         <Route path="/" element={<Home />} />
@@ -46,6 +51,8 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/setting" element={<AdminSettings />} />
+          <Route path="/prediction" element={<PredictForm />} />
+           <Route path="/setting" element={<AdminSettings />} />
           <Route path="/invoicing" element={<InvoicingPage />} />
           <Route path="/serviceconfiguration" element={<ServiceConfigurationPage />} />
           <Route path="/workflow" element={<WorkflowDevelopment />} />
