@@ -61,6 +61,7 @@ function App() {
           <Route path="/content" element={<ContentManagement />} />
           <Route path="/socialmediamanagement" element={<SocialMediaManagement />} />
           <Route path="/loyaltymanagement" element={<LoyaltyTabs />} />
+          <Route path="/predictform" element={<PredictForm />} />
         </Route>
       </Route>
 

@@ -8,7 +8,7 @@ import {
   Share2,
   Gift,
   LogOut,
-  Sparkle
+  Sparkle,
 } from 'lucide-react';
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
