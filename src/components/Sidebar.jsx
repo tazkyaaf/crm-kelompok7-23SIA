@@ -26,7 +26,6 @@ const menuItems = [
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
   { name: 'Admin Setting', icon: <Settings size={18} />, path: '/setting' },
   { name: 'Prediksi', icon: <Sparkle size={18} />, path: '/prediction' },
-  { name: 'PredictForm', icon: <FaFileAlt size={18} />, path: '/predictionform' },
 ];
 
 
