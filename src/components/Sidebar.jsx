@@ -5,14 +5,10 @@ import {
   Settings,
   LogIn,
   UserPlus,
-<<<<<<< HEAD
   Share2,
   Gift,
-  LogOut
-=======
   LogOut,
   Sparkle
->>>>>>> origin/ginta
 } from 'lucide-react';
 import { FaShoppingCart, FaPhoneAlt, FaFileAlt } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
@@ -29,7 +25,8 @@ const menuItems = [
   { name: 'Social Media Management', icon: <Share2 size={18} />, path: '/socialmediamanagement' },
   { name: 'Loyalty Management', icon: <Gift size={18} />, path: '/loyaltymanagement' },
   { name: 'Admin Setting', icon: <Settings size={18} />, path: '/setting' },
-   { name: 'Prediksi', icon: <Sparkle size={18} />, path: '/prediction' },
+  { name: 'Prediksi', icon: <Sparkle size={18} />, path: '/prediction' },
+  { name: 'PredictForm', icon: <FaFileAlt size={18} />, path: '/predictionform' },
 ];
 
 
